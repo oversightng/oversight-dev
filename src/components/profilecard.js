@@ -105,7 +105,7 @@ class ProfileCard extends React.Component {
             <p className="card-post font-big">Senate President</p>
           </div>
           <div className="col-md-3 image-map">
-            <img src="../../img/map.png"></img>
+            <img src="https://imgur.com/ws4j90c"></img>
           </div>
           <div className="col-md-5 info-cont">
             <ul>
