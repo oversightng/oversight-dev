@@ -10,11 +10,11 @@ import Admin from './components/admin';
 import AllPoliticians from './components/allpoliticians';
 
 ReactDOM.render(
-  <Router basename="/oversight/">
+  <Router basename="/oversight-dev/">
     <Switch>
-      <Route exact path="/oversight/" component={App} />
-      <Route path="/oversight/admin" component={Admin} />
-      <Route path="/oversight/all" component={AllPoliticians} />
+      <Route exact path="/oversight-dev/" component={App} />
+      <Route path="/oversight-dev/admin" component={Admin} />
+      <Route path="/oversight-dev/all" component={AllPoliticians} />
     </Switch>
   </Router>,
   document.getElementById('root'),
