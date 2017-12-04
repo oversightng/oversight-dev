@@ -112,9 +112,12 @@ class Register extends React.Component{
 
     return (
       <div className="float-left">
-        <FontIcon className="material-icons nav-icon" onClick={this.handleOpen.bind(this)}>face</FontIcon>
+        <div className="icon-cont">
+          <FontIcon className="material-icons nav-icon" onClick={this.handleOpen.bind(this)}>face</FontIcon>
+          <p className="register_img_description">Register</p>
+        </div>
         <Dialog
-          title='Register'
+          title="Register"
           actions={actions}
           modal={false}
           open={this.state.open}

@@ -88,7 +88,10 @@ class SignIn extends React.Component {
 
     return (
       <div className="float-left">
-        <FontIcon className="material-icons nav-icon" onClick={this.handleOpen.bind(this)}>input</FontIcon>
+        <div className="login-icon-cont">
+          <FontIcon className="material-icons nav-icon" onClick={this.handleOpen.bind(this)}>input</FontIcon>
+          <p className="login_img_description">Login</p>
+        </div>
         <Dialog
           title='Sign In'
           actions={actions}
