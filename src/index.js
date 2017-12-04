@@ -12,9 +12,9 @@ import AllPoliticians from './components/allpoliticians';
 ReactDOM.render(
   <Router basename="/oversight-dev">
     <Switch>
-      <Route exact path="/oversight-dev/" component={App} />
-      <Route path="/oversight-dev/admin" component={Admin} />
-      <Route path="/oversight-dev/all" component={AllPoliticians} />
+      <Route exact path="/" component={App} />
+      <Route path="/admin" component={Admin} />
+      <Route path="/all" component={AllPoliticians} />
     </Switch>
   </Router>,
   document.getElementById('root'),
