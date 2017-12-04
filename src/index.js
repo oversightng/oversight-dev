@@ -10,7 +10,7 @@ import Admin from './components/admin';
 import AllPoliticians from './components/allpoliticians';
 
 ReactDOM.render(
-  <Router basename="/oversight-dev/">
+  <Router basename="/oversight-dev">
     <Switch>
       <Route exact path="/oversight-dev/" component={App} />
       <Route path="/oversight-dev/admin" component={Admin} />
