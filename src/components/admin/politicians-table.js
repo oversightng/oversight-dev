@@ -133,6 +133,9 @@ componentDidMount() {
     const mapped_data = this.state.data.map((p) => {
       return p.name.toLowerCase();
     });
+    const filtered = this.state.data.filter((p) => {
+      return (p.name.toLowerCase().indexOf(this.state.input) > -1);
+    });
     const actions = [
       <FlatButton
         label="Cancel"
@@ -147,7 +150,7 @@ componentDidMount() {
       />,
     ];
 
-    const tablerow = this.state.data.map(p => {
+    const tablerow = filtered.map(p => {
       return (
         <tr key={p._id}>
           <td>{p.name}</td>
@@ -163,7 +166,7 @@ componentDidMount() {
         <AutoComplete
           className="search-input"
           style={searchStyle}
-          floatingLabelText="Search User"
+          floatingLabelText="Search Politician"
           filter={AutoComplete.fuzzyFilter}
           dataSource={mapped_data}
           maxSearchResults={5}

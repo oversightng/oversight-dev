@@ -59,7 +59,7 @@ class AllPoliticians extends React.Component {
       return (p.name.toLowerCase().indexOf(this.state.input) > -1);
     });
 
-    const politicians = this.state.data.map((politician, key) => {
+    const politicians = filtered.map((politician, key) => {
       return (
         <div key={politician._id} className="all-politicians-card">
           <ProfileCard
