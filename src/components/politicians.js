@@ -27,13 +27,15 @@ class Politicians extends React.Component {
       return (
         <div key={politician._id}>
           <ProfileCard
+            id={politician._id}
             name={politician.name}
             avatar={politician.avatar}
             post={politician.current_post.title}
             state={politician.state}
             dob={politician.dob}
-            party={politician.party}
+            party={politician.current_party.name}
             loggedin={this.props.loggedin}
+            averageRating={politician.rating.average}
           />
         </div>
       )

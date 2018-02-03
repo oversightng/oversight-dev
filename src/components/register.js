@@ -3,6 +3,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 
 const url = 'https://oversight-ws.herokuapp.com/api/users';
@@ -19,16 +20,16 @@ class Register extends React.Component{
       number: '',
       dob: '',
       state: '',
-    }
+    };
   }
 
   handleOpen() {
     this.setState({ open: true });
-  };
+  }
 
   handleClose() {
     this.setState({ open: false });
-  };
+  }
 
   handleFirstname(e) {
     this.setState({ firstname: e.target.value });
@@ -71,7 +72,8 @@ class Register extends React.Component{
     .then(response => response.json())
     .then(function (data) {
       localStorage.setItem('token', data.token);
-      window.location.reload();
+      // window.location.reload();
+
       // localStorage.getItem('token')
       if(!data.success) {
         alert("There was a problem registering you in. " + data.message)
@@ -158,7 +160,7 @@ class Register extends React.Component{
               className="text-field"
             /><br />
             <TextField
-              hintText="Date of Birth"
+              hintText="Date of birth"
               value={this.state.dob}
               onChange={this.handleDob.bind(this)}
               className="text-field"
@@ -167,8 +169,9 @@ class Register extends React.Component{
               hintText="State"
               value={this.state.state}
               onChange={this.handleState.bind(this)}
-              className="text-field"
+              className="text-field bottom-text-field"
             /><br />
+            <a className='facebook-login'> <img src="../img/fb.png" /> Register with Facebook </a>
           </div>
         </Dialog>
       </div>

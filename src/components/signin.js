@@ -3,6 +3,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import Profile from './profile';
 
 const url = 'https://oversight-ws.herokuapp.com/api/login';
 
@@ -20,6 +21,7 @@ class SignIn extends React.Component {
   }
 
   handleSubmit() {
+    localStorage.setItem('email', this.state.email);
     fetch(url, {
       method: 'POST',
       headers: {
@@ -34,11 +36,9 @@ class SignIn extends React.Component {
     .then(function (data) {
       localStorage.setItem('token', data.token);
       window.location.reload();
-      // localStorage.getItem('token')
       if(!data.success) {
         alert("There was a problem signing you in. " + data.message)
       } else {
-        // alert("token =" + localStorage.getItem('token') + " : " + data.message);
       }
     })
     .catch(function (error) {
@@ -48,7 +48,6 @@ class SignIn extends React.Component {
     this.setState({
       email: '',
       password: '',
-      current_username: this.state.email,
     });
   }
 
@@ -65,10 +64,6 @@ class SignIn extends React.Component {
   }
   handlePassword(e) {
     this.setState({ password: e.target.value });
-  }
-
-  handleLogin() {
-
   }
 
   render() {
@@ -112,9 +107,10 @@ class SignIn extends React.Component {
               hintText="Password"
               value={this.state.password}
               onChange={this.handlePassword.bind(this)}
-              className="text-field"
+              className="text-field bottom-text-field"
               type="password"
             /><br />
+            <a className='facebook-login'> <img src="../img/fb.png" /> Login with Facebook </a>
           </div>
         </Dialog>
       </div>

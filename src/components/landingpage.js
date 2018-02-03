@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
       loaded: false,
       current_user: '',
     }
-  };
+  }
 
   componentDidMount(){
     return fetch(REQUEST_URL)
@@ -49,15 +49,6 @@ class LandingPage extends React.Component {
     });
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    window.location.reload();
-    this.state({
-      loggedin: false,
-      current_user: '',
-    });
-  }
-
   render() {
     const filtered = this.state.data.filter((p) => {
       return (p.name.toLowerCase().indexOf(this.state.input) > -1);
@@ -65,10 +56,10 @@ class LandingPage extends React.Component {
 
 // login front end rendering of TopNav
     let topnav = null;
-    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
+    if (localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ) {
       topnav = <TopNav login={this.login.bind(this)} />;
     } else {
-      topnav = <Profile whenClicked={this.logout.bind(this)} current_user={this.state.current_user}/>;
+      topnav = <Profile />;
     }
 // ...........
 

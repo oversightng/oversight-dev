@@ -210,16 +210,11 @@ componentDidMount() {
                 className="text-field"
               /><br />
               <DatePicker
-                hintText="Open to Year"
+                hintText="Date of Birth"
                 openToYearSelection={true}
                 onChange={this.handleDob.bind(this)}
-              /><br />
-              {/* <TextField
-                hintText="Date of Birth"
-                value={this.state.dob}
-                onChange={this.handleDob.bind(this)}
                 className="text-field"
-              /><br /> */}
+              /><br />
               <TextField
                 hintText="Party"
                 value={this.state.party}

@@ -1,7 +1,6 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
-// import StarRating from 'react-star-rating';
-import Rating from 'react-rating';
+import ReactStars from 'react-stars'
 
 class ProfileCard extends React.Component {
   constructor(props) {
@@ -14,6 +13,7 @@ class ProfileCard extends React.Component {
       showProjects: false,
       showLegalCases: false,
       showBudget: false,
+      rating: '',
     };
   }
 
@@ -23,6 +23,11 @@ class ProfileCard extends React.Component {
 
   handleClose() {
     this.setState({ open: false });
+  }
+
+  handleRating() {
+    this.setState({ rating: 2 })
+    // console.log(this.state.rating);
   }
 
   handleClick(selected) {
@@ -48,18 +53,62 @@ class ProfileCard extends React.Component {
     }
   }
 
+  getAge(dob) {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
   isActive(selected) {
     return ((selected === this.state.selected) ? 'active' : 'default');
   }
 
-  handleRatingClick(e, data) {
-      alert('You left a ' + data.rating + ' star rating for ' + data.caption);
+  submitRating(id, rate) {
+    console.log(id);
+    const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}/rating`;
+    console.log(url);
+    this.setState({
+      rating: rate,
+    }, () => {
+      console.log(this.state.rating);
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          rating: this.state.rating,
+        }),
+      })
+      .then(response => response.json())
+      .then(function (data) {
+        console.log('JSON response:', data);
+        if (!data.success) {
+          alert("Rating was not sent " + data.message)
+        } else {
+          alert("Rating has been sent " + data.message);
+        }
+      })
+      .catch(function (error) {
+        console.log('Request failed', error);
+      });
+    });
   }
 
   render() {
     const bgimg = {
       backgroundImage: 'url(' + this.props.avatar  + ')',
     };
+
+    const ratingChanged = (newRating) => {
+      console.log(newRating)
+    }
 
 // Loggedin Rate input display
     let rate;
@@ -75,7 +124,28 @@ class ProfileCard extends React.Component {
     if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
       myrating = null;
     } else {
-      myrating = <Rating />;
+      myrating =
+      <ReactStars
+        count={10}
+        onChange={this.submitRating.bind(this, this.props.id)}
+        size={18}
+        value={this.state.rating}
+        color2={'#ffd700'}
+      />;
+    }
+
+// Loggedin Your Rating display
+    let averageRating;
+    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
+      averageRating = null;
+    } else {
+      averageRating =
+      <ReactStars
+        count={10}
+        value={this.props.averageRating}
+        size={18}
+        color2={'#ffd700'}
+      />;
     }
 
 // ..........
@@ -89,32 +159,29 @@ class ProfileCard extends React.Component {
             <p className="card-name">{this.props.name}</p>
             <p className="card-post">{this.props.post}</p>
             <p className="card-state">{this.props.state}</p>
-            <p className="card-dob">Age: {this.props.dob} <span>80%</span></p>
+            <p className="card-dob">Age: {this.props.dob}</p>
           </div>
         </div>
         <Dialog
-          title={this.props.name}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose.bind(this)}
           autoScrollBodyContent={true}
         >
-          <div className="col-md-4 image-cont">
-            <div className="politician-circle-img" style={bgimg}></div>
-            <p className="card-age">Age: 54</p>
-            <p className="card-post font-big">Senate President</p>
+          <div className="image-cont col-md-12">
+            <div className="img-wrap">
+              <div className="politician-circle-img" style={bgimg}></div>
+            </div>
+            <p className="card-post green font-big">{this.props.name}</p>
+            <p className="font-big">{this.props.post}</p>
           </div>
-          <div className="col-md-3 image-map">
-            <img src="../../img/map.png"></img>
-          </div>
-          <div className="col-md-5 info-cont">
+          <div className="col-md-4 col-md-offset-4 info-cont">
             <ul>
-              <li>Name: <b>{this.props.name}</b></li>
-              <li>Post: <b>{this.props.post}</b></li>
               <li>State: <b>{this.props.state}</b></li>
-              <li>DOB: <b>{this.props.dob}</b></li>
+              <li>DOB: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
-              {myrating}
+              <p>{myrating}</p>
+              <p>Avg: {averageRating}</p>
             </ul>
           </div>
         </Dialog>
