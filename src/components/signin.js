@@ -110,7 +110,7 @@ class SignIn extends React.Component {
               className="text-field bottom-text-field"
               type="password"
             /><br />
-            <a className='facebook-login'> <img src="../img/fb.png" /> Login with Facebook </a>
+            <a className='facebook-login'> <img src="https://i.imgur.com/PHbaPgQ.png" /> Login with Facebook </a>
           </div>
         </Dialog>
       </div>
