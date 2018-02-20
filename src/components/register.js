@@ -18,8 +18,6 @@ class Register extends React.Component{
       email: '',
       password: '',
       number: '',
-      dob: '',
-      state: '',
     };
   }
 
@@ -46,12 +44,12 @@ class Register extends React.Component{
   handleNumber(e) {
     this.setState({ number: e.target.value });
   }
-  handleDob(e) {
-    this.setState({ dob: e.target.value });
-  }
-  handleState(e) {
-    this.setState({ state: e.target.value });
-  }
+  // handleDob(e) {
+  //   this.setState({ dob: e.target.value });
+  // }
+  // handleState(e) {
+  //   this.setState({ state: e.target.value });
+  // }
 
   handleSubmit() {
     fetch(url, {
@@ -60,13 +58,11 @@ class Register extends React.Component{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
+        firstName: this.state.firstname,
+        lastName: this.state.lastname,
         password: this.state.password,
         phone: this.state.number,
         email: this.state.email,
-        dob: this.state.dob,
-        state: this.state.state,
       }),
     })
     .then(response => response.json())
@@ -86,14 +82,19 @@ class Register extends React.Component{
       console.log('Request failed', error);
     });
 
+    console.log(this.state.firstname);
+    console.log(this.state.lastname);
+    console.log(this.state.email);
+    console.log(this.state.password);
+    console.log(this.state.number);
+    // console.log(this.state.party);
+
     this.setState({
       firstname: '',
       lastname: '',
       email: '',
       password: '',
       number: '',
-      dob: '',
-      state: '',
     });
   }
 
@@ -158,18 +159,6 @@ class Register extends React.Component{
               value={this.state.number}
               onChange={this.handleNumber.bind(this)}
               className="text-field"
-            /><br />
-            <TextField
-              hintText="Date of birth"
-              value={this.state.dob}
-              onChange={this.handleDob.bind(this)}
-              className="text-field"
-            /><br />
-            <TextField
-              hintText="State"
-              value={this.state.state}
-              onChange={this.handleState.bind(this)}
-              className="text-field bottom-text-field"
             /><br />
             <a className='facebook-login'> <img src="https://i.imgur.com/PHbaPgQ.png" /> Register with Facebook </a>
           </div>
