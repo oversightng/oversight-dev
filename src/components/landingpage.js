@@ -67,7 +67,8 @@ class LandingPage extends React.Component {
       <div className='col-md-12 page-container'>
         {topnav}
         <div className="col-md-6 col-md-offset-4">
-          <img src="http://i.imgur.com/LHkPdtS.png" className="landing-logo img-responsive mx-auto" />
+          <img src="http://i.imgur.com/LHkPdtS.png" className="landing-logo img-responsive mx-auto float-left" />
+          <p className="beta">Beta</p>
         </div>
         <SearchBar
           data={filtered}

@@ -160,7 +160,6 @@ class Register extends React.Component{
               onChange={this.handleNumber.bind(this)}
               className="text-field"
             /><br />
-            <a className='facebook-login'> <img src="https://i.imgur.com/PHbaPgQ.png" /> Register with Facebook </a>
           </div>
         </Dialog>
       </div>

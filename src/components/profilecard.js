@@ -126,7 +126,7 @@ class ProfileCard extends React.Component {
     } else {
       myrating =
       <ReactStars
-        count={10}
+        count={5}
         onChange={this.submitRating.bind(this, this.props.id)}
         size={18}
         value={this.state.rating}
@@ -141,7 +141,7 @@ class ProfileCard extends React.Component {
     } else {
       averageRating =
       <ReactStars
-        count={10}
+        count={5}
         value={this.props.averageRating}
         size={18}
         color2={'#ffd700'}
@@ -159,7 +159,7 @@ class ProfileCard extends React.Component {
             <p className="card-name">{this.props.name}</p>
             <p className="card-post">{this.props.post}</p>
             <p className="card-state">{this.props.state}</p>
-            <p className="card-dob">Age: {this.props.dob}</p>
+            <p className="card-dob">Age: {averageRating}</p>
           </div>
         </div>
         <Dialog
