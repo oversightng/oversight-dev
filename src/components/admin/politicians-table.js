@@ -27,6 +27,7 @@ class PoliticiansTable extends React.Component {
       dob: '',
       party: '',
       date: new Date(),
+      imagePreviewUrl: '',
     };
   }
 
@@ -53,7 +54,19 @@ componentDidMount() {
     this.setState({ name: e.target.value });
   }
   handleAvatar(e) {
+    e.preventDefault();
     this.setState({ avatar: e.target.value });
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        avatar: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+    reader.readAsDataURL(file);
   }
   handlePost(e) {
     this.setState({ post: e.target.value });
@@ -123,6 +136,14 @@ componentDidMount() {
   }
 
   render() {
+    const { imagePreviewUrl } = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} alt="Politicain Avatar" />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
+
     const searchStyle = {
       color: '#3c763d',
       // display: 'none',
@@ -185,16 +206,11 @@ componentDidMount() {
           <div className="col-md-6 col-md-offset-3">
             <div className="col-md-6">
               <br />
+
               <TextField
                 hintText="Name"
                 value={this.state.name}
                 onChange={this.handleName.bind(this)}
-                className="text-field"
-              /><br />
-              <TextField
-                hintText="Avatar"
-                value={this.state.avatar}
-                onChange={this.handleAvatar.bind(this)}
                 className="text-field"
               /><br />
               <TextField
@@ -221,6 +237,15 @@ componentDidMount() {
                 onChange={this.handleParty.bind(this)}
                 className="text-field"
               /><br />
+              <TextField
+                type="file"
+                value={this.state.avatar}
+                onChange={this.handleAvatar.bind(this)}
+                className="text-field"
+              />
+              <div className="imgPreview">
+                {$imagePreview}
+              </div><br />
             </div>
           </div>
         </Dialog>
