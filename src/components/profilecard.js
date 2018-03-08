@@ -178,7 +178,7 @@ class ProfileCard extends React.Component {
           <div className="col-md-4 col-md-offset-4 info-cont">
             <ul>
               <li>State: <b>{this.props.state}</b></li>
-              <li>DOB: <b>{this.getAge(this.props.dob)}</b></li>
+              <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
               <p>{myrating}</p>
               <p>Avg: {averageRating}</p>
