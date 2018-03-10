@@ -3,6 +3,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { ToastContainer, toast } from 'react-toastify';
 import Profile from './profile';
 
 const url = 'https://oversight-ws.herokuapp.com/api/login';
@@ -37,8 +38,9 @@ class SignIn extends React.Component {
       localStorage.setItem('token', data.token);
       window.location.reload();
       if(!data.success) {
-        alert("There was a problem signing you in. " + data.message)
+        toast('Wrong login details');
       } else {
+        toast('Successf login');
       }
     })
     .catch(function (error) {

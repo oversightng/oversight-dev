@@ -26,29 +26,35 @@ class PoliticiansTable extends React.Component {
       state: '',
       dob: '',
       party: '',
+      sex: '',
+      lga: '',
+      current_post: { title: '', from: '' },
+      current_party: { name: '', from: '' },
+      wiki: '',
+      currently_serving: '',
       date: new Date(),
       imagePreviewUrl: '',
     };
   }
 
-componentDidMount() {
-  return fetch(REQUEST_URL)
-    .then(response => response.json())
-      .then((json) => {
-        this.setState({
-          data: json,
-          showDialog: false,
+  componentDidMount() {
+    return fetch(REQUEST_URL)
+      .then(response => response.json())
+        .then((json) => {
+          this.setState({
+            data: json,
+            showDialog: false,
+          });
         });
-      });
-}
+  }
 
   handleOpen() {
     this.setState({ open: true });
-  };
+  }
 
   handleClose() {
     this.setState({ open: false });
-  };
+  }
 
   handleName(e) {
     this.setState({ name: e.target.value });
@@ -57,15 +63,15 @@ componentDidMount() {
     e.preventDefault();
     this.setState({ avatar: e.target.value });
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    const reader = new FileReader();
+    const file = e.target.files[0];
 
     reader.onloadend = () => {
       this.setState({
         avatar: file,
-        imagePreviewUrl: reader.result
+        imagePreviewUrl: reader.result,
       });
-    }
+    };
     reader.readAsDataURL(file);
   }
   handlePost(e) {
@@ -85,7 +91,7 @@ componentDidMount() {
       input: s,
     });
   }
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange = (event, index, value) => this.setState({ value });
 
   handleSubmit() {
     fetch(REQUEST_URL, {
@@ -96,11 +102,15 @@ componentDidMount() {
       },
       body: JSON.stringify({
         name: this.state.name,
-        avatar: this.state.avatar,
-        current_post: { title: this.state.post },
+        dob: this.state.dob,
+        sex: this.state.sex,
         state: this.state.state,
-        dob: this.state.date,
-        current_party: { name: this.state.party },
+        lga: this.state.lga,
+        avatar: this.state.avatar,
+        current_post: { title: this.state.post_title, from: this.state.post_from },
+        current_party: { name: this.state.current_party_name, from: this.state.current_party_from },
+        wiki: this.state.wiki,
+        currently_serving: this.state.currently_serving
       }),
     })
     .then(response => response.json())
@@ -117,13 +127,6 @@ componentDidMount() {
     .catch(function (error) {
       console.log('Request failed', error);
     });
-
-    console.log(this.state.name);
-    console.log(this.state.avatar);
-    console.log(this.state.post);
-    console.log(this.state.state);
-    console.log(this.state.dob);
-    console.log(this.state.party);
 
     this.setState({
       name: '',
@@ -171,13 +174,13 @@ componentDidMount() {
       />,
     ];
 
-    const tablerow = filtered.map(p => {
+    const tablerows = filtered.map((p, key) => {
       return (
         <tr key={p._id}>
-          <td>{p.name}</td>
-          <td>{p.state}</td>
-          <td>{p.current_post.title || 'none'}</td>
-          <td>{p.rating}</td>
+          <td>{p.name || 'No data'}</td>
+          <td>{p.state || 'No data'}</td>
+          <td>{p.current_post.title || 'No data'}</td>
+          <td>{p.rating.average || 'No data'}</td>
         </tr>
       );
     });
@@ -206,7 +209,6 @@ componentDidMount() {
           <div className="col-md-6 col-md-offset-3">
             <div className="col-md-6">
               <br />
-
               <TextField
                 hintText="Name"
                 value={this.state.name}
@@ -249,7 +251,9 @@ componentDidMount() {
             </div>
           </div>
         </Dialog>
-        <button className="btn btn-success" onClick={this.handleOpen.bind(this)} > Add Politician + </button>
+        <button className="btn btn-success add-politician-btn" onClick={this.handleOpen.bind(this)}>
+          Add Politician +
+        </button>
         <table className="table">
           <thead>
             <tr>
@@ -260,7 +264,7 @@ componentDidMount() {
             </tr>
           </thead>
           <tbody>
-            {tablerow}
+            {tablerows}
           </tbody>
         </table>
       </div>

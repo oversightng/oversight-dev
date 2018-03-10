@@ -5,11 +5,12 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
+import { ToastContainer, toast } from 'react-toastify';
 
 const url = 'https://oversight-ws.herokuapp.com/api/users';
 
-class Register extends React.Component{
-  constructor(props){
+class Register extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       open: false,
@@ -68,26 +69,17 @@ class Register extends React.Component{
     .then(response => response.json())
     .then(function (data) {
       localStorage.setItem('token', data.token);
-      // window.location.reload();
 
-      // localStorage.getItem('token')
       if(!data.success) {
-        alert("There was a problem registering you in. " + data.message)
+        toast('Registeration was unsuccessful pls try again and fill all forms');
       }
       else {
-        alert("token =" + localStorage.getItem('token') + " : " + data.message);
+        toast('Registeration successful, A mail has been sent for verification');
       }
     })
     .catch(function (error) {
       console.log('Request failed', error);
     });
-
-    console.log(this.state.firstname);
-    console.log(this.state.lastname);
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log(this.state.number);
-    // console.log(this.state.party);
 
     this.setState({
       firstname: '',
@@ -129,6 +121,7 @@ class Register extends React.Component{
         >
           <div className='col-md-6 col-md-offset-3'>
             <br />
+            <ToastContainer />
             <TextField
               hintText="First Name"
               value={this.state.firstname}

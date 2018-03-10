@@ -137,7 +137,13 @@ class ProfileCard extends React.Component {
 // Loggedin Your Rating display
     let averageRating;
     if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
-      averageRating = null;
+      averageRating =
+      <ReactStars
+        count={5}
+        value={this.props.averageRating}
+        size={18}
+        color2={'#ffd700'}
+      />;
     } else {
       averageRating =
       <ReactStars
@@ -158,8 +164,8 @@ class ProfileCard extends React.Component {
           <div className="card-details">
             <p className="card-name">{this.props.name}</p>
             <p className="card-post">{this.props.post}</p>
-            <p className="card-state">{this.props.state}</p>
-            <p className="card-dob">Age: {averageRating}</p>
+            <p className="card-state">State of Origin: <b>{this.props.state}</b></p>
+            <p className="card-dob">{averageRating}</p>
           </div>
         </div>
         <Dialog
@@ -180,8 +186,8 @@ class ProfileCard extends React.Component {
               <li>State: <b>{this.props.state}</b></li>
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
-              <p>{myrating}</p>
-              <p>Avg: {averageRating}</p>
+              <p className="rating-cont">Rate Politician: {myrating}</p>
+              <p className="rating-cont">Avg: {averageRating}</p>
             </ul>
           </div>
         </Dialog>

@@ -38,7 +38,7 @@ class Politicians extends React.Component {
             averageRating={politician.rating.average}
           />
         </div>
-      )
+      );
     });
 
     return (

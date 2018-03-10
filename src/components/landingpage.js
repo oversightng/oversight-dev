@@ -25,15 +25,15 @@ class LandingPage extends React.Component {
     return fetch(REQUEST_URL)
       .then((response) => response.json() )
         .then((json) => {
-            this.setState({
-              data: json,
-              showDialog: false,
-              loaded: true,
-            });
-          })
-          .catch((error) => {
-            console.error(error);
+          this.setState({
+            data: json,
+            showDialog: false,
+            loaded: true,
           });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   handleUserInput(s) {
