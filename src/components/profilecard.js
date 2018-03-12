@@ -174,14 +174,14 @@ class ProfileCard extends React.Component {
           onRequestClose={this.handleClose.bind(this)}
           autoScrollBodyContent={true}
         >
-          <div className="image-cont col-md-12">
+          <div className="image-cont">
             <div className="img-wrap">
               <div className="politician-circle-img" style={bgimg}></div>
             </div>
             <p className="card-post green font-big">{this.props.name}</p>
             <p className="font-big">{this.props.post}</p>
           </div>
-          <div className="col-md-4 col-md-offset-4 info-cont">
+          <div className="info-cont">
             <ul>
               <li>State: <b>{this.props.state}</b></li>
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
