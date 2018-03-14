@@ -1,8 +1,11 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AutoComplete from 'material-ui/AutoComplete';
-import { SplitButton, MenuItem } from 'react-bootstrap';
-import ProfileCard from './profilecard';
+import IconButton from 'material-ui/IconButton';
+import MenuItem from 'material-ui/MenuItem';
+import IconMenu from 'material-ui/IconMenu';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import AllProfileCard from './allprofilecard';
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
 
@@ -43,6 +46,12 @@ class AllPoliticians extends React.Component {
     this.props.onUserInput(this.refs.filterTextInput.value);
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    window.location.reload();
+  }
+
   render() {
     const title = 'Filter Politicians';
     const searchStyle = {
@@ -61,15 +70,16 @@ class AllPoliticians extends React.Component {
 
     const politicians = filtered.map((politician, key) => {
       return (
-        <div key={politician._id} className="all-politicians-card">
-          <ProfileCard
+        <div key={politician._id} className="all-politicians-page-card">
+          <AllProfileCard
+            id={politician._id}
             name={politician.name}
             avatar={politician.avatar}
             post={politician.current_post.title}
             state={politician.state}
             dob={politician.dob}
             party={politician.party}
-            // loggedin={this.props.loggedin}
+            averageRating={politician.rating.average}
           />
         </div>
       );
@@ -77,42 +87,37 @@ class AllPoliticians extends React.Component {
 
     return (
       <MuiThemeProvider>
-        <div className="col-md-12">
-          <div clasName="col-md-12">
-            <div className="col-md-3">
-              <AutoComplete
-                className="search-input"
-                style={searchStyle}
-                floatingLabelText="Search Politician"
-                filter={AutoComplete.fuzzyFilter}
-                dataSource={mapped_data}
-                maxSearchResults={5}
-                onUpdateInput={this.handleUserInput.bind(this)}
-                onChange={this.handleChange.bind(this)}
-                underlineStyle={searchStyle}
-              />
-            </div>
-            <div className="col-md-2 row margintop">
-              <SplitButton id="23" title={title} className="filter-dropdown">
-                <MenuItem eventKey="1">APC</MenuItem>
-                <MenuItem eventKey="2">PDP</MenuItem>
-                <MenuItem eventKey="4">North East</MenuItem>
-                <MenuItem eventKey="4">North West</MenuItem>
-                <MenuItem eventKey="4">Middle Belt</MenuItem>
-                <MenuItem eventKey="4">South East</MenuItem>
-                <MenuItem eventKey="4">South West</MenuItem>
-                <MenuItem eventKey="4">South South</MenuItem>
-              </SplitButton>
-            </div>
-            <div className="col-md-7 margintop-2">
-              <ul className="menu-item">
-                <li><a href="/">Home</a></li>
-                <li>Rated Politicians</li>
-                <li>Unrated Politicians</li>
-              </ul>
+        <div className="col-md-12 all-politicians-cont">
+          <div className="col-md-12">
+            <AutoComplete
+              className="search-input"
+              style={searchStyle}
+              floatingLabelText="Search Politician"
+              filter={AutoComplete.fuzzyFilter}
+              dataSource={mapped_data}
+              maxSearchResults={5}
+              onUpdateInput={this.handleUserInput.bind(this)}
+              onChange={this.handleChange.bind(this)}
+              underlineStyle={searchStyle}
+            />
+            <div className="float-right">
+              <IconMenu
+                iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+              >
+                <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+                <MenuItem primaryText="APC" />
+                <MenuItem primaryText="PDP" />
+                <MenuItem primaryText="Most Liked" />
+                <MenuItem primaryText="Highest Rated" />
+                <MenuItem primaryText="Trending" />
+                <MenuItem primaryText="All Politicians" href="/oversight-dev/all"/>
+                <MenuItem primaryText="Sign out" onClick={this.logout.bind(this)} />
+              </IconMenu>
             </div>
           </div>
-          <div className="col-md-12">
+          <div className="all-politicians-container">
             {politicians}
           </div>
         </div>

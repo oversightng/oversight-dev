@@ -121,7 +121,6 @@ class Register extends React.Component {
         >
           <div className='col-md-6 col-md-offset-3'>
             <br />
-            <ToastContainer />
             <TextField
               hintText="First Name"
               value={this.state.firstname}

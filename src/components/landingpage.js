@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Loader from 'react-loader';
+import { ToastContainer, toast } from 'react-toastify';
 
 import TopNav from './topnav';
 import Profile from './profile';
@@ -65,6 +66,7 @@ class LandingPage extends React.Component {
 
     return (
       <div className='col-md-12 page-container'>
+        <ToastContainer />
         {topnav}
         <div className="col-md-6 col-md-offset-4">
           <img src="http://i.imgur.com/LHkPdtS.png" className="landing-logo img-responsive mx-auto float-left" />

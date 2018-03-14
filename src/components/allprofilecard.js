@@ -3,7 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import { ToastContainer, toast } from 'react-toastify';
 
-class ProfileCard extends React.Component {
+class AllProfileCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -118,7 +118,7 @@ class ProfileCard extends React.Component {
 
 // Loggedin Your Rating display
     let myrating;
-    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null) {
+    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
       myrating = null;
     } else {
       myrating =
@@ -130,16 +130,6 @@ class ProfileCard extends React.Component {
         color2={'#ffd700'}
       />;
     }
-    // else if (!this.state.rating){
-    //   myrating =
-    //   <ReactStars
-    //     count={5}
-    //     onChange={this.submitRating.bind(this, this.props.id)}
-    //     size={18}
-    //     value={this.state.rating}
-    //     color2={'#ffd700'}
-    //   />;
-    // }
 
 // Loggedin Your Rating display
     let averageRating;
@@ -165,13 +155,14 @@ class ProfileCard extends React.Component {
 
     return (
       <div>
-        <div className="card-container" onClick={this.handleOpen.bind(this)}>
-          <div className="card-img" style={bgimg}>
+        <ToastContainer />
+        <div className="all-card-container" onClick={this.handleOpen.bind(this)}>
+          <div className="all-card-img" style={bgimg}>
           </div>
-          <div className="card-details">
-            <p className="card-name">{this.props.name}</p>
-            <p className="card-post">{this.props.post}</p>
-            <p className="card-state"><b>{this.props.state}</b></p>
+          <div className="all-card-details">
+            <p className="all-card-name">{this.props.name}</p>
+            <p className="all-card-post">{this.props.post}</p>
+            <p className="all-card-state"><b>{this.props.state}</b></p>
             <p className="card-dob">{averageRating}</p>
           </div>
         </div>
@@ -203,4 +194,4 @@ class ProfileCard extends React.Component {
   }
 }
 
-export default ProfileCard;
+export default AllProfileCard;

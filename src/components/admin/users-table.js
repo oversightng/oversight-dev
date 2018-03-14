@@ -29,11 +29,11 @@ class UsersTable extends React.Component {
         'x-access-token': localStorage.getItem('token'),
       },
     })
-    .then(response => response.json())
+    .then((response) => response.json())
       .then((json) => {
+        console.log(json);
         this.setState({
           data: json,
-          showDialog: false,
         });
       });
   }
@@ -72,13 +72,13 @@ class UsersTable extends React.Component {
       },
     };
     const mapped_data = this.state.data.map((p) => {
-      return p.name.toLowerCase();
+      return p.email.toLowerCase();
     });
     const tablerow = this.state.data.map(p => {
       return (
         <tr key={p._id}>
-          <td>{p.username}</td>
           <td>{p.email}</td>
+          <td>{p.password}</td>
           <td>
             <DropDownMenu value={this.state.value} onChange={this.handleChange}>
               <MenuItem value={1} primaryText="Subscriber" />
@@ -106,8 +106,7 @@ class UsersTable extends React.Component {
         <table className="table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>State</th>
+              <th>Email</th>
               <th>Role</th>
               <th>Delete</th>
             </tr>

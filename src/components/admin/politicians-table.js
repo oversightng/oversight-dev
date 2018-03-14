@@ -4,6 +4,10 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import AutoComplete from 'material-ui/AutoComplete';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
 
@@ -22,16 +26,14 @@ class PoliticiansTable extends React.Component {
       open: false,
       name: '',
       avatar: '',
-      post: '',
       state: '',
-      dob: '',
-      party: '',
-      sex: '',
+      dob: new Date(),
+      sex: 1,
       lga: '',
       current_post: { title: '', from: '' },
       current_party: { name: '', from: '' },
       wiki: '',
-      currently_serving: '',
+      currently_serving: 1,
       date: new Date(),
       imagePreviewUrl: '',
     };
@@ -55,7 +57,7 @@ class PoliticiansTable extends React.Component {
   handleClose() {
     this.setState({ open: false });
   }
-
+/* Politician form handlers */
   handleName(e) {
     this.setState({ name: e.target.value });
   }
@@ -74,18 +76,48 @@ class PoliticiansTable extends React.Component {
     };
     reader.readAsDataURL(file);
   }
-  handlePost(e) {
-    this.setState({ post: e.target.value });
-  }
   handleState(e) {
     this.setState({ state: e.target.value });
   }
-  handleDob(e) {
-    this.setState({ dob: e.target.value });
+  handleDob(nil, e) {
+    this.setState({ dob: e });
+    // this.setState({ dob: e.target.value });
+    // console.log(this.state.dob);
+    console.log(this.state.dob);
   }
-  handleParty(e) {
-    this.setState({ party: e.target.value });
+  handleSex(e, i, v) {
+    this.setState({ sex: v });
   }
+  handleLga(e) {
+    this.setState({ lga: e.target.value });
+  }
+  handleCurrentPostTitle(e) {
+    const currentPost = Object.assign({}, this.state.current_post);
+    this.setState({ current_post: { title: e.target.value, from: this.state.current_post.from } });
+    console.log(currentPost);
+  }
+  handleCurrentPostFrom(e) {
+    const currentPost = Object.assign({}, this.state.current_post);
+    this.setState({ current_post: { title: this.state.current_post.title, from: e.target.value } });
+    console.log(currentPost);
+  }
+  handleCurrentPartyName(e) {
+    const currentParty = Object.assign({}, this.state.current_party);
+    this.setState({ current_party: { name: e.target.value, from: this.state.current_party.from } });
+    console.log(currentParty);
+  }
+  handleCurrentPartyFrom(e) {
+    const currentParty = Object.assign({}, this.state.current_party);
+    this.setState({ current_party: { name: this.state.current_party.name, from: e.target.value } });
+    console.log(currentParty);
+  }
+  handleWiki(e) {
+    this.setState({ wiki: e.target.value });
+  }
+  handleCurrentlyServing(e, i, v) {
+    this.setState({ currently_serving: v });
+  }
+
   handleUserInput(s) {
     this.setState({
       input: s,
@@ -102,13 +134,13 @@ class PoliticiansTable extends React.Component {
       },
       body: JSON.stringify({
         name: this.state.name,
+        avatar: this.state.avatar,
+        state: this.state.state,
         dob: this.state.dob,
         sex: this.state.sex,
-        state: this.state.state,
         lga: this.state.lga,
-        avatar: this.state.avatar,
-        current_post: { title: this.state.post_title, from: this.state.post_from },
-        current_party: { name: this.state.current_party_name, from: this.state.current_party_from },
+        current_post: { title: this.state.current_post.title, from: this.state.current_post.from },
+        current_party: { name: this.state.current_party.name, from: this.state.current_party.from },
         wiki: this.state.wiki,
         currently_serving: this.state.currently_serving
       }),
@@ -118,10 +150,10 @@ class PoliticiansTable extends React.Component {
       console.log('JSON response:', data);
       console.log(REQUEST_URL);
       if(!data.success) {
-        alert("There was a problem adding politician. " + data.message)
+        toast('Adding Politician was unsuccessful pls try again and fill all forms');
       }
       else {
-        alert("Politician Added Successfully");
+        toast("Politician Added Successfully");
       }
     })
     .catch(function (error) {
@@ -131,10 +163,56 @@ class PoliticiansTable extends React.Component {
     this.setState({
       name: '',
       avatar: '',
-      post: '',
       state: '',
-      dob: '',
-      party: '',
+      dob: new Date(),
+      sex: '',
+      lga: '',
+      current_post: { title: '', from: '' },
+      current_party: { name: '', from: '' },
+      wiki: '',
+      currently_serving: '',
+    });
+  }
+
+  updatePolitician(id) {
+    const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}`;
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        avatar: this.state.avatar,
+        state: this.state.state,
+        dob: this.state.dob,
+        sex: this.state.sex,
+        lga: this.state.lga,
+        current_post: { title: this.state.current_post.title, from: this.state.current_post.from },
+        current_party: { name: this.state.current_party.name, from: this.state.current_party.from },
+        wiki: this.state.wiki,
+        currently_serving: this.state.currently_serving
+      }),
+    })
+    .then()
+  }
+  deletePolitician(id) {
+    const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}`;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then((res) => {
+      if (res.success) {
+        toast('Politician not deleted');
+      } else {
+        window.location.reload();
+        toast('Politician deleted');
+      }
     });
   }
 
@@ -181,12 +259,15 @@ class PoliticiansTable extends React.Component {
           <td>{p.state || 'No data'}</td>
           <td>{p.current_post.title || 'No data'}</td>
           <td>{p.rating.average || 'No data'}</td>
+          <td><a onClick={this.updatePolitician.bind(this, p._id)}>Edit</a></td>
+          <td><a onClick={this.deletePolitician.bind(this, p._id)}>delete</a></td>
         </tr>
       );
     });
 
     return (
       <div className="col-md-9 admin-table">
+        <ToastContainer />
         <AutoComplete
           className="search-input"
           style={searchStyle}
@@ -214,12 +295,7 @@ class PoliticiansTable extends React.Component {
                 value={this.state.name}
                 onChange={this.handleName.bind(this)}
                 className="text-field"
-              /><br />
-              <TextField
-                hintText="Post"
-                value={this.state.post}
-                onChange={this.handlePost.bind(this)}
-                className="text-field"
+                required
               /><br />
               <TextField
                 hintText="State"
@@ -231,20 +307,60 @@ class PoliticiansTable extends React.Component {
                 hintText="Date of Birth"
                 openToYearSelection={true}
                 onChange={this.handleDob.bind(this)}
+              /><br />
+              <span>Sex?</span>
+              <DropDownMenu value={this.state.sex} onChange={this.handleSex.bind(this)}>
+                <MenuItem value={1} primaryText="Male" />
+                <MenuItem value={2} primaryText="Female" />
+              </DropDownMenu>
+              <TextField
+                hintText="LGA"
+                value={this.state.lga}
+                onChange={this.handleLga.bind(this)}
+                className="text-field"
+                required
+              /><br />
+              <TextField
+                hintText="Current Post"
+                value={this.state.current_post.title}
+                onChange={this.handleCurrentPostTitle.bind(this)}
                 className="text-field"
               /><br />
               <TextField
-                hintText="Party"
-                value={this.state.party}
-                onChange={this.handleParty.bind(this)}
+                hintText="Previous Post"
+                value={this.state.current_post.from}
+                onChange={this.handleCurrentPostFrom.bind(this)}
                 className="text-field"
               /><br />
+              <TextField
+                hintText="Current Party"
+                value={this.state.current_party.name}
+                onChange={this.handleCurrentPartyName.bind(this)}
+                className="text-field"
+              /><br />
+              <TextField
+                hintText="Previous Party"
+                value={this.state.current_party.from}
+                onChange={this.handleCurrentPartyFrom.bind(this)}
+                className="text-field"
+              /><br />
+              <TextField
+                hintText="Wikipedia url"
+                value={this.state.wiki}
+                onChange={this.handleWiki.bind(this)}
+                className="text-field"
+              /><br />
+              <span>Currently Serving?</span>
+              <DropDownMenu value={this.state.currently_serving} onChange={this.handleCurrentlyServing.bind(this)}>
+                <MenuItem value={1} primaryText="True" />
+                <MenuItem value={2} primaryText="False" />
+              </DropDownMenu>
               <TextField
                 type="file"
                 value={this.state.avatar}
                 onChange={this.handleAvatar.bind(this)}
                 className="text-field"
-              />
+              /><br />
               <div className="imgPreview">
                 {$imagePreview}
               </div><br />
@@ -261,6 +377,8 @@ class PoliticiansTable extends React.Component {
               <th>State</th>
               <th>Position</th>
               <th>Rating</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

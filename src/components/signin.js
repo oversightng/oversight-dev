@@ -4,7 +4,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { ToastContainer, toast } from 'react-toastify';
-import Profile from './profile';
 
 const url = 'https://oversight-ws.herokuapp.com/api/login';
 
@@ -36,11 +35,12 @@ class SignIn extends React.Component {
     .then(response => response.json())
     .then(function (data) {
       localStorage.setItem('token', data.token);
-      window.location.reload();
-      if(!data.success) {
+
+      if (!data.success) {
         toast('Wrong login details');
       } else {
-        toast('Successf login');
+        toast('Successfully logged in');
+        window.location.reload();
       }
     })
     .catch(function (error) {
