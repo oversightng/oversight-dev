@@ -7,6 +7,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { ToastContainer, toast } from 'react-toastify';
+import UpdatePolitician from './update-politician';
 
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
@@ -24,8 +25,8 @@ class PoliticiansTable extends React.Component {
       data: [],
       input: '',
       open: false,
+      avatar: [],
       name: '',
-      avatar: '',
       state: '',
       dob: new Date(),
       sex: 1,
@@ -62,19 +63,19 @@ class PoliticiansTable extends React.Component {
     this.setState({ name: e.target.value });
   }
   handleAvatar(e) {
+    console.log('upload avatar function');
+    console.log(e.target.files);
     e.preventDefault();
-    this.setState({ avatar: e.target.value });
-
     const reader = new FileReader();
-    const file = e.target.files[0];
+    reader.onload = function(ee) {
+      this.setState({avatar: ee.target.files[0]});
+      console.log(ee);
+    }.bind(this);
 
-    reader.onloadend = () => {
-      this.setState({
-        avatar: file,
-        imagePreviewUrl: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
+    // this.setState({
+    //   avatar: e.target.files[0],
+    // });
+    console.log(this.state.avatar);
   }
   handleState(e) {
     this.setState({ state: e.target.value });
@@ -126,6 +127,7 @@ class PoliticiansTable extends React.Component {
   handleChange = (event, index, value) => this.setState({ value });
 
   handleSubmit() {
+    console.log(this.state.avatar);
     fetch(REQUEST_URL, {
       method: 'POST',
       headers: {
@@ -174,29 +176,6 @@ class PoliticiansTable extends React.Component {
     });
   }
 
-  updatePolitician(id) {
-    const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}`;
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        avatar: this.state.avatar,
-        state: this.state.state,
-        dob: this.state.dob,
-        sex: this.state.sex,
-        lga: this.state.lga,
-        current_post: { title: this.state.current_post.title, from: this.state.current_post.from },
-        current_party: { name: this.state.current_party.name, from: this.state.current_party.from },
-        wiki: this.state.wiki,
-        currently_serving: this.state.currently_serving
-      }),
-    })
-    .then()
-  }
   deletePolitician(id) {
     const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}`;
     fetch(url, {
@@ -259,7 +238,22 @@ class PoliticiansTable extends React.Component {
           <td>{p.state || 'No data'}</td>
           <td>{p.current_post.title || 'No data'}</td>
           <td>{p.rating.average || 'No data'}</td>
-          <td><a onClick={this.updatePolitician.bind(this, p._id)}>Edit</a></td>
+          <UpdatePolitician
+            _id={p._id}
+            name={p.name}
+            state={p.state}
+            dob={p.dob}
+            sex={p.sex}
+            lga={p.lga}
+            current_post={p.current_post.title}
+            previous_post={p.current_post.from}
+            current_party={p.current_party.name}
+            previous_party={p.current_party.from}
+            wiki={p.wiki}
+            currently_serving={p.currently_serving}
+            avatar={p.avatar}
+          />
+          <td></td>
           <td><a onClick={this.deletePolitician.bind(this, p._id)}>delete</a></td>
         </tr>
       );
@@ -287,84 +281,81 @@ class PoliticiansTable extends React.Component {
           onRequestClose={this.handleClose.bind(this)}
           autoScrollBodyContent={true}
         >
-          <div className="col-md-6 col-md-offset-3">
-            <div className="col-md-6">
-              <br />
-              <TextField
-                hintText="Name"
-                value={this.state.name}
-                onChange={this.handleName.bind(this)}
-                className="text-field"
-                required
-              /><br />
-              <TextField
-                hintText="State"
-                value={this.state.state}
-                onChange={this.handleState.bind(this)}
-                className="text-field"
-              /><br />
-              <DatePicker
-                hintText="Date of Birth"
-                openToYearSelection={true}
-                onChange={this.handleDob.bind(this)}
-              /><br />
-              <span>Sex?</span>
-              <DropDownMenu value={this.state.sex} onChange={this.handleSex.bind(this)}>
-                <MenuItem value={1} primaryText="Male" />
-                <MenuItem value={2} primaryText="Female" />
-              </DropDownMenu>
-              <TextField
-                hintText="LGA"
-                value={this.state.lga}
-                onChange={this.handleLga.bind(this)}
-                className="text-field"
-                required
-              /><br />
-              <TextField
-                hintText="Current Post"
-                value={this.state.current_post.title}
-                onChange={this.handleCurrentPostTitle.bind(this)}
-                className="text-field"
-              /><br />
-              <TextField
-                hintText="Previous Post"
-                value={this.state.current_post.from}
-                onChange={this.handleCurrentPostFrom.bind(this)}
-                className="text-field"
-              /><br />
-              <TextField
-                hintText="Current Party"
-                value={this.state.current_party.name}
-                onChange={this.handleCurrentPartyName.bind(this)}
-                className="text-field"
-              /><br />
-              <TextField
-                hintText="Previous Party"
-                value={this.state.current_party.from}
-                onChange={this.handleCurrentPartyFrom.bind(this)}
-                className="text-field"
-              /><br />
-              <TextField
-                hintText="Wikipedia url"
-                value={this.state.wiki}
-                onChange={this.handleWiki.bind(this)}
-                className="text-field"
-              /><br />
-              <span>Currently Serving?</span>
-              <DropDownMenu value={this.state.currently_serving} onChange={this.handleCurrentlyServing.bind(this)}>
-                <MenuItem value={1} primaryText="True" />
-                <MenuItem value={2} primaryText="False" />
-              </DropDownMenu>
-              <TextField
-                type="file"
-                value={this.state.avatar}
-                onChange={this.handleAvatar.bind(this)}
-                className="text-field"
-              /><br />
-              <div className="imgPreview">
-                {$imagePreview}
-              </div><br />
-            </div>
+          <div className="col-md-4">
+            <TextField
+              hintText="Name"
+              value={this.state.name}
+              onChange={this.handleName.bind(this)}
+              className="text-field"
+              required
+            /><br />
+            <TextField
+              hintText="State"
+              value={this.state.state}
+              onChange={this.handleState.bind(this)}
+              className="text-field"
+            /><br />
+            <DatePicker
+              hintText="Date of Birth"
+              openToYearSelection={true}
+              onChange={this.handleDob.bind(this)}
+            /><br />
+            <DropDownMenu value={this.state.sex} onChange={this.handleSex.bind(this)}>
+              <MenuItem label="Sex" value={1} primaryText="Male" />
+              <MenuItem value={2} primaryText="Female" />
+            </DropDownMenu>
+            <TextField
+              hintText="LGA"
+              value={this.state.lga}
+              onChange={this.handleLga.bind(this)}
+              className="text-field"
+              required
+            /><br />
+            <TextField
+              hintText="Current Post"
+              value={this.state.current_post.title}
+              onChange={this.handleCurrentPostTitle.bind(this)}
+              className="text-field"
+            /><br />
+          </div>
+          <div className="col-md-8">
+            <TextField
+              hintText="Previous Post"
+              value={this.state.current_post.from}
+              onChange={this.handleCurrentPostFrom.bind(this)}
+              className="text-field"
+            /><br />
+            <TextField
+              hintText="Current Party"
+              value={this.state.current_party.name}
+              onChange={this.handleCurrentPartyName.bind(this)}
+              className="text-field"
+            /><br />
+            <TextField
+              hintText="Previous Party"
+              value={this.state.current_party.from}
+              onChange={this.handleCurrentPartyFrom.bind(this)}
+              className="text-field"
+            /><br />
+            <TextField
+              hintText="Wikipedia url"
+              value={this.state.wiki}
+              onChange={this.handleWiki.bind(this)}
+              className="text-field"
+            /><br />
+            <DropDownMenu value={this.state.currently_serving} onChange={this.handleCurrentlyServing.bind(this)}>
+              <MenuItem label="Currently Serving?" value={1} primaryText="True" />
+              <MenuItem value={2} primaryText="False" />
+            </DropDownMenu>
+            <TextField
+              type="file"
+              value={this.state.avatar}
+              onChange={this.handleAvatar.bind(this)}
+              className="text-field"
+            /><br />
+            <div className="imgPreview">
+              {$imagePreview}
+            </div><br />
           </div>
         </Dialog>
         <button className="btn btn-success add-politician-btn" onClick={this.handleOpen.bind(this)}>

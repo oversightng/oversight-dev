@@ -41,7 +41,7 @@ class TopNav extends React.Component {
           autoScrollBodyContent={true}
         >
           <div>
-            <img src="http://oi67.tinypic.com/tybl.jpg" />
+            <img className="about-img-size" src="http://oi67.tinypic.com/tybl.jpg" />
           </div>
         </Dialog>
       </div>

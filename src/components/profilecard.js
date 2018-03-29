@@ -1,7 +1,10 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
-import { ToastContainer, toast } from 'react-toastify';
+import RaisedButton from 'material-ui/RaisedButton';
+import { toast } from 'react-toastify';
+import FullProfile from './fullpage';
+
 
 class ProfileCard extends React.Component {
   constructor(props) {
@@ -15,6 +18,7 @@ class ProfileCard extends React.Component {
       showLegalCases: false,
       showBudget: false,
       rating: '',
+      childVisible: false,
     };
   }
 
@@ -98,6 +102,14 @@ class ProfileCard extends React.Component {
     });
   }
 
+  handleProfileClick() {
+    this.handleClose.bind(this);
+    console.log('fullprofile clicked');
+    this.setState({
+      childVisible: true,
+    });
+  }
+
   render() {
     const bgimg = {
       backgroundImage: 'url(' + this.props.avatar  + ')',
@@ -165,6 +177,20 @@ class ProfileCard extends React.Component {
 
     return (
       <div>
+        {
+          this.state.childVisible
+            ? <FullProfile
+              name={this.props.name}
+              avatar={this.props.avatar}
+              post={this.props.post}
+              state={this.props.state}
+              dob={this.props.dob}
+              party={this.props.party}
+              loggedin={this.props.loggedin}
+              averageRating={averageRating}
+            />
+            : null
+        }
         <div className="card-container" onClick={this.handleOpen.bind(this)}>
           <div className="card-img" style={bgimg}>
           </div>
@@ -195,6 +221,7 @@ class ProfileCard extends React.Component {
               <li>Party: <b>{this.props.party}</b></li>
               <p className="rating-cont">Rate Politician: {myrating}</p>
               <p className="rating-cont">Avg: {averageRating}</p>
+              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this)}/></p>
             </ul>
           </div>
         </Dialog>

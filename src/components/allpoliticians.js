@@ -100,19 +100,19 @@ class AllPoliticians extends React.Component {
               onChange={this.handleChange.bind(this)}
               underlineStyle={searchStyle}
             />
-            <div className="float-right">
+            <div className="float-right icon-menu">
               <IconMenu
                 iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                 targetOrigin={{ horizontal: 'right', vertical: 'top' }}
               >
-                <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+                <MenuItem primaryText="Admin Page" href="/admin" />
                 <MenuItem primaryText="APC" />
                 <MenuItem primaryText="PDP" />
                 <MenuItem primaryText="Most Liked" />
                 <MenuItem primaryText="Highest Rated" />
                 <MenuItem primaryText="Trending" />
-                <MenuItem primaryText="All Politicians" href="/oversight-dev/all"/>
+                <MenuItem primaryText="All Politicians" href="/all"/>
                 <MenuItem primaryText="Sign out" onClick={this.logout.bind(this)} />
               </IconMenu>
             </div>

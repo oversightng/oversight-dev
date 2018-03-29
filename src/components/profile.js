@@ -18,7 +18,7 @@ class Profile extends React.Component {
     return (
       <div className="col-md-12">
         <span><img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></span>
-        <div style={styles.topnavIcons} className="float-left">
+        <div style={styles.topnavIcons} className="float-left icon-menu">
           <IconMenu
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}

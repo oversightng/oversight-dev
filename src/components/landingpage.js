@@ -1,5 +1,6 @@
+'use strict';
+
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
 import Loader from 'react-loader';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -19,11 +20,18 @@ class LandingPage extends React.Component {
       loggedin: false,
       loaded: false,
       current_user: '',
+      token_valid: false,
     }
   }
 
+  authenticate() {
+    this.setState({ token_valid: true });
+  }
+
   componentDidMount(){
-    return fetch(REQUEST_URL)
+    const token_auth = 'https://oversight-ws.herokuapp.com/api/authenticate';
+
+    fetch(REQUEST_URL)
       .then((response) => response.json() )
         .then((json) => {
           this.setState({
@@ -35,6 +43,28 @@ class LandingPage extends React.Component {
         .catch((error) => {
           console.error(error);
         });
+
+    fetch(token_auth, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then(response => response.json())
+      .then(function (data) {
+        if (!data.success) {
+          toast("Please Sign in for full Oversight user experience");
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+        } else {
+          console.log('token is valid');
+        }
+      })
+      .catch(function (error) {
+        console.log('Request failed', error);
+      });
+
   }
 
   handleUserInput(s) {
@@ -57,7 +87,7 @@ class LandingPage extends React.Component {
 
 // login front end rendering of TopNav
     let topnav = null;
-    if (localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ) {
+    if (localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null) {
       topnav = <TopNav login={this.login.bind(this)} />;
     } else {
       topnav = <Profile />;
@@ -69,8 +99,7 @@ class LandingPage extends React.Component {
         <ToastContainer />
         {topnav}
         <div className="col-md-6 col-md-offset-4">
-          <img src="http://i.imgur.com/LHkPdtS.png" className="landing-logo img-responsive mx-auto float-left" />
-          <p className="beta">Beta</p>
+          <img src="http://oi63.tinypic.com/j15112.jpg" className="landing-logo img-responsive mx-auto float-left" />
         </div>
         <SearchBar
           data={filtered}
