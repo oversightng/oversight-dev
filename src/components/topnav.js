@@ -24,7 +24,7 @@ class TopNav extends React.Component {
 
   render() {
     return (
-      <div className="col-md-12">
+      <div className="col-md-12 topnav-container">
         <span><img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></span>
         <div style={styles.topnavIcons}>
           <div className="float-left">
