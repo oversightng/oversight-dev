@@ -13,8 +13,8 @@ ReactDOM.render(
   <Router basename="/oversight-dev">
     <Switch>
       <Route exact path="/" component={App} />
-      <Route path="/admin" component={Admin} />
-      <Route path="/all" component={AllPoliticians} />
+      <Route path="/oversight-dev/admin" component={Admin} />
+      <Route path="/oversight-dev/all" component={AllPoliticians} />
     </Switch>
   </Router>,
   document.getElementById('root'),

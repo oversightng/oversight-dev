@@ -336,9 +336,9 @@ class PoliticiansTable extends React.Component {
               className="text-field"
             /><br />
             <TextField
-              hintText="Previous Party"
+              hintText="Party History"
               value={this.state.current_party.from}
-              onChange={this.handlePreviousPartyName.bind(this)}
+              onChange={this.handlePartyHistoryName.bind(this)}
               className="text-field"
             /><br />
             <TextField
