@@ -106,7 +106,7 @@ class AllPoliticians extends React.Component {
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                 targetOrigin={{ horizontal: 'right', vertical: 'top' }}
               >
-                <MenuItem primaryText="Admin Page" href="/admin" />
+                <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
                 <MenuItem primaryText="APC" />
                 <MenuItem primaryText="PDP" />
                 <MenuItem primaryText="Most Liked" />
