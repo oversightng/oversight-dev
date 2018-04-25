@@ -20,10 +20,10 @@ class UpdatePolitician extends React.Component {
       dob: new Date(),
       sex: 1,
       lga: '',
-      current_post: { title: '' },
-      portfolio: { title: '' },
-      current_party: { name: '' },
-      party_history: { name: '' },
+      current_post: { title: '', from: '' },
+      portfolio: { title: '', from: '', to: '' },
+      current_party: { name: '', from: '' },
+      party_history: { name: '', from: '', to: '' },
       wiki: '',
       currently_serving: 1,
       date: new Date(),
@@ -33,16 +33,16 @@ class UpdatePolitician extends React.Component {
 
   componentWillMount() {
     this.setState({
-      name: '',
-      avatar: '',
-      state: '',
+      name: this.props.name,
+      avatar: this.props.avatar,
+      state: this.props.state,
       dob: new Date(),
-      sex: 1,
-      lga: '',
-      current_post: { title: '' },
-      portfolio: { title: '' },
-      current_party: { name: '' },
-      party_history: { name: '' },
+      sex: this.props.sex,
+      lga: this.props.lga,
+      current_post: { title: this.props.current_post, from: '' },
+      portfolio: { title: this.props.portfolio, from: '', to: '' },
+      current_party: { name: this.props.current_party, from: '' },
+      party_history: { name: this.props.party_history, from: '', to: '' },
       wiki: '',
     });
   }
@@ -62,10 +62,10 @@ class UpdatePolitician extends React.Component {
         dob: this.state.dob,
         sex: this.state.sex,
         lga: this.state.lga,
-        current_post: { title: this.state.current_post.title},
-        portfolio: {title: this.state.portfolio.title },
-        current_party: { name: this.state.current_party.name },
-        party_history: { name: this.state.party_history.name },
+        current_post: { title: this.state.current_post.title, from: '' },
+        portfolio: {title: this.state.portfolio.title, from: '', to: '' },
+        current_party: { name: this.state.current_party.name, from: '' },
+        party_history: { name: this.state.party_history.name, from: '', to: '' },
         wiki: this.state.wiki,
         currently_serving: this.state.currently_serving
       }),
@@ -91,7 +91,9 @@ class UpdatePolitician extends React.Component {
       sex: '',
       lga: '',
       current_post: { title: '', from: '' },
+      portfolio: { title: '', from: '', to: '' },
       current_party: { name: '', from: '' },
+      party_history: { name: '', from: '', to: '' },
       wiki: '',
       currently_serving: '',
     });
@@ -140,23 +142,23 @@ class UpdatePolitician extends React.Component {
   }
   handleCurrentPostTitle(e) {
     const currentPost = Object.assign({}, this.state.current_post);
-    this.setState({ current_post: { title: e.target.value } });
+    this.setState({ current_post: { title: e.target.value, from: '' } });
     console.log(currentPost);
   }
-  handlePreviousPostTitle(e) {
+  handlePortfolioTitle(e) {
     const previousPost = Object.assign({}, this.state.previous_post);
-    this.setState({ previous_post: { title: e.target.value } });
+    this.setState({ portfolio: { title: e.target.value, from: '', to: '' } });
     console.log(previousPost);
   }
   handleCurrentPartyName(e) {
     const currentParty = Object.assign({}, this.state.current_party);
-    this.setState({ current_party: { name: e.target.value } });
+    this.setState({ current_party: { name: e.target.value, from: '' } });
     console.log(currentParty);
   }
-  handlePreviousPartyName(e) {
-    const previousParty = Object.assign({}, this.state.previous_party);
-    this.setState({ previous_party: { name: e.target.value } });
-    console.log(previousParty);
+  handlePartyHistoryName(e) {
+    const partyHistory = Object.assign({}, this.state.party_history);
+    this.setState({ party_history: { name: e.target.value, from: '', to: '' } });
+    console.log(partyHistory);
   }
   handleWiki(e) {
     this.setState({ wiki: e.target.value });
@@ -237,9 +239,9 @@ class UpdatePolitician extends React.Component {
           </div>
           <div className="col-md-8">
             <TextField
-              hintText="Previous Post"
+              hintText="Portfolio"
               value={this.state.previous_post}
-              onChange={this.handlePreviousPostTitle.bind(this)}
+              onChange={this.handlePortfolioTitle.bind(this)}
               className="text-field"
             /><br />
             <TextField
@@ -249,9 +251,9 @@ class UpdatePolitician extends React.Component {
               className="text-field"
             /><br />
             <TextField
-              hintText="Previous Party"
-              value={this.props.previous_party}
-              onChange={this.handlePreviousPartyName.bind(this)}
+              hintText="Party History"
+              value={this.props.party_history}
+              onChange={this.handlePartyHistoryName.bind(this)}
               className="text-field"
             /><br />
             <TextField
