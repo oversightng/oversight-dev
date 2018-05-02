@@ -219,7 +219,13 @@ class ProfileCard extends React.Component {
               <li>State: <b>{this.props.state}</b></li>
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
-              <p className="rating-cont">Rate Politician: {myrating}</p>
+              {
+                localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
+                  <p className="rating-cont">Rate Politician: <p className="login-to-rate"> Login to rate </p></p>
+                ) : (
+                  <p className="rating-cont">Rate Politician: {myrating}</p>
+                )
+              }
               <p className="rating-cont">Avg: {averageRating}</p>
               <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this)}/></p>
             </ul>
