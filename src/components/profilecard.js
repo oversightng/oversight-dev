@@ -162,6 +162,7 @@ class ProfileCard extends React.Component {
         value={this.props.averageRating}
         size={18}
         color2={'#ffd700'}
+        edit={false}
       />;
     } else {
       averageRating =
@@ -170,7 +171,7 @@ class ProfileCard extends React.Component {
         value={this.props.averageRating}
         size={18}
         color2={'#ffd700'}
-        disabled={true}
+        edit={false}
       />;
     }
 
