@@ -15,7 +15,6 @@ class UpdatePolitician extends React.Component {
       input: '',
       open: false,
       name: '',
-      avatar: '',
       state: '',
       dob: new Date(),
       sex: 1,
@@ -34,7 +33,7 @@ class UpdatePolitician extends React.Component {
   componentWillMount() {
     this.setState({
       name: this.props.name,
-      avatar: this.props.avatar,
+      // avatar: this.props.avatar,
       state: this.props.state,
       dob: new Date(),
       sex: this.props.sex,
@@ -57,7 +56,6 @@ class UpdatePolitician extends React.Component {
       },
       body: JSON.stringify({
         name: this.state.name,
-        avatar: this.state.avatar,
         state: this.state.state,
         dob: this.state.dob,
         sex: this.state.sex,
@@ -85,7 +83,6 @@ class UpdatePolitician extends React.Component {
 
     this.setState({
       name: '',
-      avatar: '',
       state: '',
       dob: new Date(),
       sex: '',
@@ -110,21 +107,21 @@ class UpdatePolitician extends React.Component {
   handleName(e) {
     this.setState({ name: e.target.value });
   }
-  handleAvatar(e) {
-    e.preventDefault();
-    this.setState({ avatar: e.target.value });
-
-    const reader = new FileReader();
-    const file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        avatar: file,
-        imagePreviewUrl: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
-  }
+  // handleAvatar(e) {
+  //   e.preventDefault();
+  //   this.setState({ avatar: e.target.value });
+  //
+  //   const reader = new FileReader();
+  //   const file = e.target.files[0];
+  //
+  //   reader.onloadend = () => {
+  //     this.setState({
+  //       avatar: file,
+  //       imagePreviewUrl: reader.result,
+  //     });
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
   handleState(e) {
     this.setState({ state: e.target.value });
   }
@@ -266,15 +263,7 @@ class UpdatePolitician extends React.Component {
               <MenuItem label="Currently Serving?" value={1} primaryText="True" />
               <MenuItem value={2} primaryText="False" />
             </DropDownMenu>
-            <TextField
-              type="file"
-              value={this.props.avatar}
-              onChange={this.handleAvatar.bind(this)}
-              className="text-field"
-            /><br />
-            <div className="imgPreview">
-              {$imagePreview}
-            </div><br />
+            <br />
           </div>
         </Dialog>
         <a onClick={this.handleOpen.bind(this)}>
