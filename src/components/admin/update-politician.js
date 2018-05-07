@@ -16,10 +16,10 @@ class UpdatePolitician extends React.Component {
       open: false,
       name: '',
       state: '',
-      dob: new Date(),
+      dob: '',
       sex: 1,
       lga: '',
-      current_post: { title: '', from: '' },
+      current_post: { from: '', title: '' },
       portfolio: { title: '', from: '', to: '' },
       current_party: { name: '', from: '' },
       party_history: { name: '', from: '', to: '' },
@@ -33,9 +33,8 @@ class UpdatePolitician extends React.Component {
   componentWillMount() {
     this.setState({
       name: this.props.name,
-      // avatar: this.props.avatar,
       state: this.props.state,
-      dob: new Date(),
+      dob: this.props.dob,
       sex: this.props.sex,
       lga: this.props.lga,
       current_post: { title: this.props.current_post, from: '' },
@@ -60,7 +59,7 @@ class UpdatePolitician extends React.Component {
         dob: this.state.dob,
         sex: this.state.sex,
         lga: this.state.lga,
-        current_post: { title: this.state.current_post.title, from: '' },
+        current_post: { from: '', title: this.state.current_post.title },
         portfolio: {title: this.state.portfolio.title, from: '', to: '' },
         current_party: { name: this.state.current_party.name, from: '' },
         party_history: { name: this.state.party_history.name, from: '', to: '' },
@@ -68,32 +67,32 @@ class UpdatePolitician extends React.Component {
         currently_serving: this.state.currently_serving
       }),
     })
-    // .then(response => response.json())
-    // .then(function (data) {
-    //   if(!data.success) {
-    //     toast('Updating Politician was unsuccessful pls try again and fill all forms');
-    //   }
-    //   else {
-    //     toast("Politician Updated Successfully");
-    //   }
-    // })
+    .then(response => response.json())
+    .then(function (data) {
+      if(!data.success) {
+        toast('Updating Politician was unsuccessful pls try again and fill all forms');
+      }
+      else {
+        toast("Politician Updated Successfully");
+      }
+    })
     .catch(function (error) {
       console.log('Request failed', error);
     });
 
-    this.setState({
-      name: '',
-      state: '',
-      dob: new Date(),
-      sex: '',
-      lga: '',
-      current_post: { title: '', from: '' },
-      portfolio: { title: '', from: '', to: '' },
-      current_party: { name: '', from: '' },
-      party_history: { name: '', from: '', to: '' },
-      wiki: '',
-      currently_serving: '',
-    });
+    // this.setState({
+    //   name: '',
+    //   state: '',
+    //   dob: new Date(),
+    //   sex: '',
+    //   lga: '',
+    //   current_post: { from: '', title: '' },
+    //   portfolio: { title: '', from: '', to: '' },
+    //   current_party: { name: '', from: '' },
+    //   party_history: { name: '', from: '', to: '' },
+    //   wiki: '',
+    //   currently_serving: '',
+    // });
   }
 
   handleOpen() {
@@ -139,22 +138,22 @@ class UpdatePolitician extends React.Component {
   }
   handleCurrentPostTitle(e) {
     const currentPost = Object.assign({}, this.state.current_post);
-    this.setState({ current_post: { title: e.target.value, from: '' } });
+    this.setState({ current_post: { title: e.target.value } });
     console.log(currentPost);
   }
   handlePortfolioTitle(e) {
-    const previousPost = Object.assign({}, this.state.previous_post);
-    this.setState({ portfolio: { title: e.target.value, from: '', to: '' } });
+    const previousPost = Object.assign({}, this.state.portfolio);
+    this.setState({ portfolio: { title: e.target.value } });
     console.log(previousPost);
   }
   handleCurrentPartyName(e) {
     const currentParty = Object.assign({}, this.state.current_party);
-    this.setState({ current_party: { name: e.target.value, from: '' } });
+    this.setState({ current_party: { name: e.target.value } });
     console.log(currentParty);
   }
   handlePartyHistoryName(e) {
     const partyHistory = Object.assign({}, this.state.party_history);
-    this.setState({ party_history: { name: e.target.value, from: '', to: '' } });
+    this.setState({ party_history: { name: e.target.value } });
     console.log(partyHistory);
   }
   handleWiki(e) {
@@ -198,6 +197,7 @@ class UpdatePolitician extends React.Component {
           autoScrollBodyContent={true}
         >
           <div className="col-md-4">
+            <label>Name:</label>
             <TextField
               hintText="Name"
               value={this.state.name}
@@ -205,13 +205,17 @@ class UpdatePolitician extends React.Component {
               className="text-field"
               required
             /><br />
+            <label>State:</label>
             <TextField
               hintText="State"
               value={this.state.state}
               onChange={this.handleState.bind(this)}
               className="text-field"
             /><br />
+            <label>Date of Birth:</label>
             <DatePicker
+              autoOk={true}
+              value={this.state.dob}
               hintText="Date of Birth"
               openToYearSelection={true}
               onChange={this.handleDob.bind(this)}
@@ -220,6 +224,7 @@ class UpdatePolitician extends React.Component {
               <MenuItem label="Sex" value={1} primaryText="Male" />
               <MenuItem value={2} primaryText="Female" />
             </DropDownMenu>
+            <label>LGA:</label>
             <TextField
               hintText="LGA"
               value={this.state.lga}
@@ -227,35 +232,40 @@ class UpdatePolitician extends React.Component {
               className="text-field"
               required
             /><br />
+            <label>Current Post:</label>
             <TextField
               hintText="Current Post"
-              value={this.state.current_post}
+              value={this.state.current_post.title}
               onChange={this.handleCurrentPostTitle.bind(this)}
               className="text-field"
             /><br />
           </div>
           <div className="col-md-8">
+            <label>Previous Post:</label>
             <TextField
               hintText="Portfolio"
-              value={this.state.previous_post}
+              value={this.state.portfolio.title}
               onChange={this.handlePortfolioTitle.bind(this)}
               className="text-field"
             /><br />
+            <label>Current Party:</label>
             <TextField
               hintText="Current Party"
-              value={this.props.current_party}
+              value={this.state.current_party.name}
               onChange={this.handleCurrentPartyName.bind(this)}
               className="text-field"
             /><br />
+            <label>Previous Party:</label>
             <TextField
               hintText="Party History"
-              value={this.props.party_history}
+              value={this.state.party_history.name}
               onChange={this.handlePartyHistoryName.bind(this)}
               className="text-field"
             /><br />
+            <label>Wiki:</label>
             <TextField
               hintText="Wikipedia url"
-              value={this.props.wiki}
+              value={this.state.wiki}
               onChange={this.handleWiki.bind(this)}
               className="text-field"
             /><br />
