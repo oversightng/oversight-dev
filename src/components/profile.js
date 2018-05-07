@@ -24,8 +24,8 @@ class Profile extends React.Component {
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             targetOrigin={{ horizontal: 'right', vertical: 'top' }}
           >
-            <MenuItem primaryText="Admin Page" href="/admin" />
-            <MenuItem primaryText="All Politicians" href="/all" />
+            <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+            <MenuItem primaryText="All Politicians" href="/oversight-dev/all" />
             <MenuItem primaryText="Sign out" onClick={this.logout.bind(this)} />
           </IconMenu>
         </div>
