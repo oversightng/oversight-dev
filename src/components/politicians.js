@@ -19,7 +19,28 @@ class Politicians extends React.Component {
     super(props);
     this.state = {
       open: false,
+      verified: false,
     };
+  }
+
+  componentDidMount() {
+    const id = localStorage.getItem('id');
+    const REQUEST_URL = `https://oversight-ws.herokuapp.com/api/verify?id=${id}`;
+    return fetch(REQUEST_URL)
+    .then((response) => response.json() )
+      .then((json) => {
+        console.log(json);
+        if (!json.success) {
+          toast("Please Verify Your Account. Link was sent to your Email")
+        } else {
+          this.setState({
+            verified: true,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -36,6 +57,7 @@ class Politicians extends React.Component {
             party={politician.current_party.name}
             loggedin={this.props.loggedin}
             averageRating={politician.rating.average}
+            verified={this.state.verified}
           />
         </div>
       );

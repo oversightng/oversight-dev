@@ -34,7 +34,9 @@ class SignIn extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
+      console.log(data);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('id', data.user.id);
 
       if (!data.success) {
         toast('Wrong login details');

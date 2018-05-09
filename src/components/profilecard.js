@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from 'react-loader';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -19,7 +20,37 @@ class ProfileCard extends React.Component {
       showBudget: false,
       rating: '',
       childVisible: false,
+      loaded: true,
     };
+  }
+
+  resendLink(){
+    this.setState({
+      loaded: false,
+    });
+    console.log('Resend link clicked');
+    const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/resend';
+    return fetch(REQUEST_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem('email'),
+      }),
+    })
+    .then(response => response.json())
+    .then(function (data) {
+      if(!data.success) {
+        toast('Resend link was unsuccessful');
+      }
+      else {
+        toast("Email Verification link was sent Successfully");
+      }
+    })
+    .catch(function (error) {
+      console.log('Request failed', error);
+    });
   }
 
   handleOpen() {
@@ -142,16 +173,6 @@ class ProfileCard extends React.Component {
         color2={'#ffd700'}
       />;
     }
-    // else if (!this.state.rating){
-    //   myrating =
-    //   <ReactStars
-    //     count={5}
-    //     onChange={this.submitRating.bind(this, this.props.id)}
-    //     size={18}
-    //     value={this.state.rating}
-    //     color2={'#ffd700'}
-    //   />;
-    // }
 
 // Loggedin Your Rating display
     let averageRating;
@@ -200,7 +221,15 @@ class ProfileCard extends React.Component {
             <p className="card-name">{this.props.name}</p>
             <p className="card-post">{this.props.post}</p>
             <p className="card-state"><b>{this.props.state}</b></p>
-            <p className="card-dob">{averageRating}</p>
+            {
+              localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
+                <p className="card-dob"><p className="login-to-rate"> Login to view rating </p></p>
+              ) : !this.props.verified ? (
+                <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
+              ) : (
+                <p className="card-dob">{averageRating}</p>
+              )
+            }
           </div>
         </div>
         <Dialog
@@ -221,14 +250,29 @@ class ProfileCard extends React.Component {
               <li>State: <b>{this.props.state}</b></li>
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
+              <Loader loaded={this.state.loaded} className="loader" lines={15} length={5} width={3} radius={30}
+                corners={1} rotate={0} direction={1} color="green" speed={3}
+                trail={60} shadow={false} hwaccel={false} className="spinner"
+                zIndex={2e9}>
+              </Loader>
               {
                 localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
                   <p className="rating-cont">Rate Politician: <p className="login-to-rate"> Login to rate </p></p>
+                ) : !this.props.verified ? (
+                  <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
                 ) : (
                   <p className="rating-cont">Rate Politician: {myrating}</p>
                 )
               }
-              <p className="rating-cont">Avg: {averageRating}</p>
+              {
+                localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
+                  <p className="rating-cont">Avg:<p className="login-to-rate"> Login to view rating </p></p>
+                ) : !this.props.verified ? (
+                  <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
+                ) : (
+                  <p className="rating-cont">Avg: {averageRating}</p>
+                )
+              }
               <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this)}/></p>
             </ul>
           </div>

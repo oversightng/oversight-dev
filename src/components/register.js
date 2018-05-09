@@ -45,12 +45,6 @@ class Register extends React.Component {
   handleNumber(e) {
     this.setState({ number: e.target.value });
   }
-  // handleDob(e) {
-  //   this.setState({ dob: e.target.value });
-  // }
-  // handleState(e) {
-  //   this.setState({ state: e.target.value });
-  // }
 
   handleSubmit() {
     fetch(url, {

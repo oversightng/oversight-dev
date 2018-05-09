@@ -7,6 +7,37 @@ import styles from './styles';
 
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      admin: false,
+    };
+  }
+
+  componentDidMount() {
+    const url = 'https://oversight-ws.herokuapp.com/api/admin';
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then(response => response.json())
+    .then(function (data) {
+      if (!data.success) {
+        console.log('user isnt an admin');
+      } else {
+        console.log('user is an admin');
+        this.setState({
+          admin: true,
+        });
+      }
+    })
+    .catch(function (error) {
+      console.log('Request failed', error);
+    });
+  }
 
   logout() {
     localStorage.removeItem('token');
@@ -24,7 +55,13 @@ class Profile extends React.Component {
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             targetOrigin={{ horizontal: 'right', vertical: 'top' }}
           >
-            <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+            {
+              this.state.admin ? (
+                <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+              ) : (
+                <MenuItem primaryText="Edit Profile" href="" />
+              )
+            }
             <MenuItem primaryText="All Politicians" href="/oversight-dev/all" />
             <MenuItem primaryText="Sign out" onClick={this.logout.bind(this)} />
           </IconMenu>

@@ -23,14 +23,14 @@ class AllPoliticians extends React.Component {
     return fetch(REQUEST_URL)
       .then((response) => response.json() )
         .then((json) => {
-            this.setState({
-              data: json,
-              showDialog: false,
-            });
-          })
-          .catch((error) => {
-            console.error(error);
+          this.setState({
+            data: json,
+            showDialog: false,
           });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   handleUserInput(s) {
@@ -49,6 +49,7 @@ class AllPoliticians extends React.Component {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('id');
     window.location.reload();
   }
 
