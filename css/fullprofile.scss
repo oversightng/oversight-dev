@@ -1,0 +1,51 @@
+#full-profile {
+  position: absolute !important;
+  top:0;
+  z-index: 100000000;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.full-profile-container {
+  margin: 10px;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.full-profile-politician-cont {
+  width: 100%;
+  height: 1200px;
+  float: left;
+}
+.full-profile-img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 12em;
+  width: 10em;
+}
+.clear-icon {
+  position: absolute !important;
+  font-size: 50px !important;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  &:hover {
+    cursor: pointer;
+    font-size: 55px !important;
+  }
+}
+.fullprofile-img-cont {
+  width: 15%;
+  float: left;
+}
+.fullprofile-details-cont {
+  width: 80%;
+  float: left;
+}
+.fullprofile-rating div span {
+  font-size: 40px !important;
+}
+.comments-container {
+  clear: both;
+}

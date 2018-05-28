@@ -1,0 +1,101 @@
+@media only screen and (max-width: 414px) {
+  .bg-img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  .landing-logo {
+    margin-left:30px;
+    height: 80px;
+  }
+  .center {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .slick-next:before, .slick-prev:before {
+    font-size: 40px !important;
+  }
+  h3 {
+    font-size: 11px !important;
+    padding: 5px !important;
+  }
+  .info-cont ul {
+    margin-left: 0 !important;
+    font-size: 10px !important;
+  }
+  .text-field {
+    font-size: 10px !important;
+    width: 150px !important;
+  }
+  .text-dob div div {
+    font-size: 10px !important;
+  }
+  .logo-thumb {
+    width: 39px;
+    height: 27px;
+  }
+  /* PROFILE.SCSS */
+  .image-cont {
+    width: 100% !important;
+  }
+  .beta {
+    font-size: 11px;
+    float: left;
+    padding-top: 27px !important;
+    padding-left: 2px;
+  }
+  .rating-cont div {
+    margin: 0 46px !important;
+  }
+  .info-cont ul li {
+    font-size: 15px !important;
+  }
+  /*****************************************
+              PROFILE CARD
+  *****************************************/
+  .all-card-container {
+    margin: 0 !important;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+  }
+  .all-politicians-page-card {
+    width: 100px !important;
+    float: left;
+    margin: 0 0 5px 10px;
+  }
+  .all-card-img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 4em !important;
+  }
+  .all-card-details{
+    background-color: white;
+    padding: 4px !important;
+    height: 80px !important;
+  }
+  p.all-card-name {
+    font-weight: bold;
+    margin: 0;
+    font-size: 8px !important;
+  }
+  p.all-card-post {
+    margin: 0;
+    font-weight: bold;
+    font-size: 6px !important;
+    color: green;
+  }
+  p.all-card-state {
+    margin: 0;
+    font-size: 6px !important;
+  }
+  p.card-dob span{
+    font-size: 10px !important;
+  }
+  .about-img-size{
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+}

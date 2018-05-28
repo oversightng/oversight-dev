@@ -1,0 +1,95 @@
+.search-container {
+  text-align: center;
+}
+.search-container p {
+  color: white;
+  margin-bottom: 0;
+}
+.logo-thumb {
+  width: 60px;
+  height: 40px;
+}
+.landing-logo {
+  height: 150px;
+}
+div.search-input {
+  background-color: white !important;
+  height: 60px !important;
+  border-radius: 50px !important;
+  border: 1px solid green !important;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+input[type=text] {
+  margin: 0 !important;
+}
+label {
+  color: green !important;
+  top: 19px !important;
+  transform-origin: left bottom 5px !important;
+}
+.search-input label {
+  margin-left: 20px;
+}
+.about_img_description {
+  // visibility: hidden;
+  color: green;
+  text-align: center;
+  font-size: 10px;
+}
+.icon-cont:hover .about_img_description {
+  visibility: visible !important;
+  cursor: pointer;
+  font-style: italic;
+}
+.register_img_description {
+  // visibility: hidden;
+  color: green;
+  text-align: center;
+  font-size: 10px;
+}
+.icon-cont:hover .register_img_description {
+  visibility: visible !important;
+  cursor: pointer;
+  font-style: italic;
+}
+.login_img_description {
+  // visibility: hidden;
+  color: green;
+  text-align: center;
+  font-size: 10px;
+}
+.login-icon-cont:hover .login_img_description {
+  visibility: visible !important;
+  cursor: pointer;
+  font-style: italic;
+}
+.bottom-text-field {
+  margin-bottom: 20px;
+}
+.facebook-login {
+  margin-top: 50px;
+  width: 200px;
+  height: 50px;
+  padding: 15px;
+  background-color: #3B5998;
+  color: white;
+  border-radius: 30px;
+    &:hover {
+      background: #8b9dc3;
+      color: #3B5998;
+      text-decoration: none;
+    }
+}
+.invisible {
+  visibility: hidden;
+}
+.beta {
+  color: white;
+  padding-top: 54px;
+  font-weight: bolder;
+}
+.about-img-size{
+  height: 460px;
+  margin: 0 20%;
+}

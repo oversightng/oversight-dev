@@ -4,7 +4,15 @@ import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
 import { toast } from 'react-toastify';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from 'react-share';
 import FullProfile from './fullpage';
+
+
+const shareUrl = 'http://priincetech.com'
 
 
 class ProfileCard extends React.Component {
@@ -275,6 +283,7 @@ class ProfileCard extends React.Component {
               }
               <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this)}/></p>
             </ul>
+            <FacebookShareButton url={shareUrl} />
           </div>
         </Dialog>
       </div>

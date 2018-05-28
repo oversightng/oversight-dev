@@ -1,0 +1,59 @@
+.all-politicians-cont {
+  margin-top: 10px;
+}
+.all-politicians-container {
+  width: 100%;
+  height: 100%;
+}
+.icon-menu {
+  position: fixed;
+  top: 10px;
+  right: 0;
+}
+.edit-politician-cont {
+  padding-top: 12px;
+}
+/*****************************************
+            PROFILE CARD
+*****************************************/
+.all-card-container {
+  margin: 10px;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+}
+.all-card-container:hover {
+  -webkit-transform: scale(1.01);
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.all-politicians-page-card {
+  width: 200px;
+  float: left;
+}
+.all-card-img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 6em;
+}
+.all-card-details{
+  background-color: white;
+  padding: 10px;
+  height: 120px;
+}
+p.all-card-name {
+  font-weight: bold;
+  margin: 0;
+  font-size: 12px;
+}
+p.all-card-post {
+  margin: 0;
+  font-weight: bold;
+  font-size: 10px;
+  color: green;
+}
+p.all-card-state {
+  margin: 0;
+  font-size: 10px;
+}

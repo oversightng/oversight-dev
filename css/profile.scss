@@ -1,0 +1,190 @@
+.dialogTab {
+  display: inline;
+  list-style-type: none;
+}
+.dialogTab li {
+  padding-right: 20px;
+  padding-left: 20px;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  border-right: 1px solid grey;
+}
+.profile-container {
+  padding: 50px;
+}
+.bg-img {
+  background-image: url('https://i.imgur.com/fhJMVKA.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.slick-slider .slick-list, .slick-slider .slick-track {
+  height: 350px;
+}
+/*****************************************
+            PROFILE CARD
+*****************************************/
+.card-container {
+  margin: 10px;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+}
+.card-container:hover {
+  -webkit-transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.card-img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 12em;
+}
+.card-details{
+  background-color: white;
+  padding: 10px;
+  height: 130px;
+}
+p.card-name {
+  font-weight: bold;
+  margin: 0;
+  font-size: 14px;
+}
+p.card-post {
+  margin: 0;
+  font-weight: bold;
+  font-size: 11px;
+  color: green;
+}
+.green {
+  color: green;
+}
+p.card-state {
+  margin: 0;
+  font-size: 11px;
+}
+p.card-dob {
+  margin: 0;
+  font-size: 12px;
+  span {
+    float: right;
+    color: green;
+  }
+}
+p.my-rating {
+  font-size: 13px;
+  font-weight: bold;
+}
+p.rate-tab {
+  // font-size: 1px;
+  font-weight: bold;
+}
+.rate-input {
+  width: 40px;
+}
+.img-wrap {
+  width: 120px;
+  height: 120px;
+  background: green;
+  z-index: -1;
+  border-radius: 50%;
+  text-align: center;
+  margin: auto;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.image-cont {
+  width: 100%;
+  padding-top: 10px;
+  float: left;
+  display: inline-block;
+  text-align: center;
+  z-index: 1;
+}
+.all-politicians-card {
+  width: 250px;
+  float: left;
+}
+.politicians-container {
+  padding: 0 50px;
+}
+.politician-circle-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 55px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  // margin: auto;
+}
+.margintop {
+  margin-top: 15px;
+}
+.margintop-2 {
+  margin-top: 20px;
+}
+.menu-item {
+  list-style-type: none;
+}
+.menu-item li {
+  display: inline-block;
+  margin-right: 20px;
+}
+.info-cont {
+  width: 100%;
+  text-align: center;
+  padding: 0 20px;
+  float: left;
+  display: block;
+  list-style-type: none;
+    ul {
+      list-style-type: none;
+    }
+}
+.rating-cont {
+  div {
+    margin: 0 285px;
+  }
+}
+.navigation-cont {
+  width: inherit;
+  clear: both;
+  list-style-type: none;
+  li {
+    cursor: pointer;
+    float: left;
+    padding: 10px 20px;
+  }
+}
+.tab-info {
+  clear: both;
+}
+.active {
+  text-decoration: underline;
+}
+.default {
+  text-decoration: none;
+}
+.card-age {
+  margin-top: 20px;
+  font-size: 15px;
+  margin-bottom: 0;
+}
+.font-big {
+  font-size: 18px !important;
+}
+.image-map {
+  margin-top: 20px;
+}
+.login-to-rate {
+  font-size: 10px;
+  font-style: italic;
+  color: red;
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
