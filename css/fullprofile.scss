@@ -9,6 +9,7 @@
 .full-profile-container {
   margin: 10px;
   padding: 0;
+  height: 200px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
@@ -47,5 +48,8 @@
   font-size: 40px !important;
 }
 .comments-container {
+  overflow: auto;
+  height: 400px;
+  margin: 10px 40px;
   clear: both;
 }

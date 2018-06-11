@@ -5,6 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import FullProfile from './components/fullpage';
 import App from './components/app';
 import Admin from './components/admin';
 import AllPoliticians from './components/allpoliticians';

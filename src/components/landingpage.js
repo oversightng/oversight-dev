@@ -3,7 +3,6 @@
 import React from 'react';
 import Loader from 'react-loader';
 import { ToastContainer, toast } from 'react-toastify';
-
 import TopNav from './topnav';
 import Profile from './profile';
 import SearchBar from './searchbar';

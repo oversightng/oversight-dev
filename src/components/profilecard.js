@@ -9,6 +9,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from 'react-share';
+import { withRouter } from 'react-router-dom'
 import FullProfile from './fullpage';
 
 
@@ -141,12 +142,11 @@ class ProfileCard extends React.Component {
     });
   }
 
-  handleProfileClick() {
+  handleProfileClick(id) {
     this.handleClose.bind(this);
     console.log('fullprofile clicked');
-    this.setState({
-      childVisible: true,
-    });
+    console.log(id);
+    this.props.history.push(`/profile/${id}`);
   }
 
   render() {
@@ -208,20 +208,6 @@ class ProfileCard extends React.Component {
 
     return (
       <div>
-        {
-          this.state.childVisible
-            ? <FullProfile
-              name={this.props.name}
-              avatar={this.props.avatar}
-              post={this.props.post}
-              state={this.props.state}
-              dob={this.props.dob}
-              party={this.props.party}
-              loggedin={this.props.loggedin}
-              averageRating={averageRating}
-            />
-            : null
-        }
         <div className="card-container" onClick={this.handleOpen.bind(this)}>
           <div className="card-img" style={bgimg}>
           </div>
@@ -281,7 +267,7 @@ class ProfileCard extends React.Component {
                   <p className="rating-cont">Avg: {averageRating}</p>
                 )
               }
-              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this)}/></p>
+              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.id)}/></p>
             </ul>
             <FacebookShareButton url={shareUrl} />
           </div>
@@ -291,4 +277,4 @@ class ProfileCard extends React.Component {
   }
 }
 
-export default ProfileCard;
+export default withRouter(ProfileCard);

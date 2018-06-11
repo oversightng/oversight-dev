@@ -1,31 +1,47 @@
 import React from 'react';
 import ReactStars from 'react-stars';
+import Disqus from 'disqus-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
-
-const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
+import { withRouter } from 'react-router-dom'
 
 class fullPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      profile: {},
     };
   }
 
-  componentDidMount() {
-    const fullprofile = document.getElementById("full-profile");
-    document.body.appendChild(fullprofile);
+  componentDidMount(){
+    const REQUEST_URL = `https://oversight-ws.herokuapp.com/api/politicians/${this.props.match.params.id}`
+    fetch(REQUEST_URL)
+      .then((response) => response.json() )
+        .then((json) => {
+          this.setState({
+            profile: json,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   reload() {
-    window.location.reload();
+    this.props.history.push('/');
   }
 
   render() {
+    const disqusShortname = 'example';
+    const disqusConfig = {
+        // url: this.props.article.url,
+        // identifier: this.state.profile.id,
+        // title: this.props.article.title,
+    };
+
     const bgimg = {
-      backgroundImage: 'url(' + this.props.avatar  + ')',
+      backgroundImage: 'url(' + this.state.profile.avatar  + ')',
     };
 
     let comments;
@@ -38,24 +54,26 @@ class fullPage extends React.Component {
         />;
     }
 
-    let averageRating;
-    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
-      averageRating =
-      <ReactStars
-        count={5}
-        value={this.props.averageRating}
-        size={18}
-        color2={'#ffd700'}
-      />;
-    } else {
-      averageRating =
-      <ReactStars
-        count={5}
-        value={this.props.averageRating}
-        size={18}
-        color2={'#ffd700'}
-      />;
-    }
+    // let averageRating;
+    // if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
+    //   averageRating =
+    //   <ReactStars
+    //     count={5}
+    //     value={this.state.profile.rating.average}
+    //     size={18}
+    //     color2={'#ffd700'}
+    //     edit={false}
+    //   />;
+    // } else {
+    //   averageRating =
+    //   <ReactStars
+    //     count={5}
+    //     value={this.state.profile.rating.average}
+    //     size={18}
+    //     color2={'#ffd700'}
+    //     edit={false}
+    //   />;
+    // }
 
     return (
       <MuiThemeProvider>
@@ -68,15 +86,17 @@ class fullPage extends React.Component {
             <FontIcon className="material-icons clear-icon" onClick={this.reload.bind(this)}>clear</FontIcon>
             <div className="fullprofile-details-cont">
               <div className="all-card-details">
-                <p className="all-card-name">{this.props.name}</p>
-                <p className="all-card-post">{this.props.post}</p>
-                <p className="all-card-state"><b>{this.props.state}</b></p>
-                <p className="fullprofile-rating">{averageRating}</p>
+                <p className="all-card-name">{this.state.profile.name}</p>
+                <p className="all-card-post">{this.state.profile.post}</p>
+                <p className="all-card-state"><b>{this.state.profile.state}</b></p>
+                <p className="fullprofile-rating">{this.state.profile.rating}</p>
               </div>
             </div>
           </div>
           <div className="comments-container">
-            {comments}
+              <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
+              </Disqus.CommentCount>
+              <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
           </div>
         </div>
       </MuiThemeProvider>
@@ -84,4 +104,4 @@ class fullPage extends React.Component {
   }
 }
 
-export default fullPage;
+export default withRouter(fullPage);
