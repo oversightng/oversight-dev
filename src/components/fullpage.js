@@ -4,7 +4,7 @@ import Disqus from 'disqus-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 class fullPage extends React.Component {
   constructor(props) {
@@ -35,11 +35,10 @@ class fullPage extends React.Component {
   render() {
     const disqusShortname = 'example';
     const disqusConfig = {
-        // url: this.props.article.url,
-        // identifier: this.state.profile.id,
+      // url: 'localhost:8080',
+        // identifier: this.props.article.id,
         // title: this.props.article.title,
     };
-
     const bgimg = {
       backgroundImage: 'url(' + this.state.profile.avatar  + ')',
     };
@@ -80,8 +79,7 @@ class fullPage extends React.Component {
         <div id="full-profile">
           <div className="full-profile-container">
             <div className="fullprofile-img-cont">
-              <div className="full-profile-img" style={bgimg}>
-              </div>
+              <div className="full-profile-img" style={bgimg} />
             </div>
             <FontIcon className="material-icons clear-icon" onClick={this.reload.bind(this)}>clear</FontIcon>
             <div className="fullprofile-details-cont">
@@ -94,9 +92,10 @@ class fullPage extends React.Component {
             </div>
           </div>
           <div className="comments-container">
-              <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
-              </Disqus.CommentCount>
-              <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+            <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
+            Comments
+            </Disqus.CommentCount>
+            <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
           </div>
         </div>
       </MuiThemeProvider>

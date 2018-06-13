@@ -3,7 +3,7 @@ const { StyleSheet } = React;
 
 export default{
   container: {
-    backgroundColor: '#FBFAFA',
+    backgroundColor: 'white',
   },
   topnavIcons: {
     float: 'right',

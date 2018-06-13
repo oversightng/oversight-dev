@@ -9,12 +9,9 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from 'react-share';
-import { withRouter } from 'react-router-dom'
-import FullProfile from './fullpage';
+import { withRouter } from 'react-router-dom';
 
-
-const shareUrl = 'http://priincetech.com'
-
+const shareUrl = 'http://priincetech.com';
 
 class ProfileCard extends React.Component {
   constructor(props) {
@@ -143,7 +140,6 @@ class ProfileCard extends React.Component {
   }
 
   handleProfileClick(id) {
-    this.handleClose.bind(this);
     console.log('fullprofile clicked');
     console.log(id);
     this.props.history.push(`/profile/${id}`);

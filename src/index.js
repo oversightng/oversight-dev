@@ -5,10 +5,10 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import FullProfile from './components/fullpage';
 import App from './components/app';
 import Admin from './components/admin';
 import AllPoliticians from './components/allpoliticians';
+import FullPage from './components/fullPage';
 
 ReactDOM.render(
   <Router basename="/oversight-dev">
@@ -16,6 +16,7 @@ ReactDOM.render(
       <Route exact path="/" component={App} />
       <Route path="/admin" component={Admin} />
       <Route path="/all" component={AllPoliticians} />
+      <Route path="/profile/:id" component={FullPage} />
     </Switch>
   </Router>,
   document.getElementById('root'),
