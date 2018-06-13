@@ -177,6 +177,9 @@ label {
   background: green !important;
   color: white !important; }
 
+.topnav-container {
+  padding-top: 20px; }
+
 .dialogTab {
   display: inline;
   list-style-type: none; }

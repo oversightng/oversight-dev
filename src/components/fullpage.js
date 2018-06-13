@@ -35,9 +35,9 @@ class fullPage extends React.Component {
   render() {
     const disqusShortname = 'example';
     const disqusConfig = {
-      // url: 'localhost:8080',
-        // identifier: this.props.article.id,
-        // title: this.props.article.title,
+      url: 'https://beta-oversight-ng.disqus.com/',
+      // identifier: this.props.article.id,
+      // title: this.props.article.title,
     };
     const bgimg = {
       backgroundImage: 'url(' + this.state.profile.avatar  + ')',
