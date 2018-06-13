@@ -360,6 +360,9 @@ p.rate-tab {
     background-repeat: no-repeat;
     background-attachment: fixed; }
 
+  .search-container {
+    margin-bottom: 0 !important; }
+
   .landing-logo {
     margin-left: 30px;
     height: 80px; }
