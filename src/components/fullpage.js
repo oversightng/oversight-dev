@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactStars from 'react-stars';
-import Disqus from 'disqus-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
 import { withRouter } from 'react-router-dom';
+import Comments from './comments'
 
 class fullPage extends React.Component {
   constructor(props) {
@@ -33,12 +33,6 @@ class fullPage extends React.Component {
   }
 
   render() {
-    const disqusShortname = 'example';
-    const disqusConfig = {
-      url: 'https://beta-oversight-ng.disqus.com/',
-      // identifier: this.props.article.id,
-      // title: this.props.article.title,
-    };
     const bgimg = {
       backgroundImage: 'url(' + this.state.profile.avatar  + ')',
     };
@@ -92,10 +86,7 @@ class fullPage extends React.Component {
             </div>
           </div>
           <div className="comments-container">
-            <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
-            Comments
-            </Disqus.CommentCount>
-            <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+            <Comments />
           </div>
         </div>
       </MuiThemeProvider>

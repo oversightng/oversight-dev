@@ -51,7 +51,29 @@
   overflow: auto;
   height: 400px;
   margin: 10px 40px;
-  clear: both; }
+  clear: both;
+  border: 1px solid rgba(0, 0, 0, 0.07); }
+
+.comment-cont {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  padding: 5px 20px; }
+
+.comment-name {
+  height: 40px !important; }
+
+.comment-text {
+  height: 80px !important; }
+
+.comment-avatar {
+  margin-right: 10px; }
+
+.comment-history-avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; }
+
+.comments-history {
+  margin-top: 20px; }
 
 .bg-img {
   background-image: url("https://image.ibb.co/fgN8VJ/newbg_min.jpg");
@@ -456,7 +478,11 @@ p.rate-tab {
 
   .about-img-size {
     height: auto !important;
-    margin: 0 !important; } }
+    margin: 0 !important; }
+
+  .fullprofile-details-cont {
+    width: 58% !important;
+    float: right !important; } }
 .slick-next:before, .slick-prev:before {
   color: #3c763d !important;
   font-size: 90px !important; }
