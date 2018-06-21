@@ -14,7 +14,7 @@ class fullPage extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const REQUEST_URL = `https://oversight-ws.herokuapp.com/api/politicians/${this.props.match.params.id}`
     fetch(REQUEST_URL)
       .then((response) => response.json() )
@@ -36,16 +36,6 @@ class fullPage extends React.Component {
     const bgimg = {
       backgroundImage: 'url(' + this.state.profile.avatar  + ')',
     };
-
-    let comments;
-    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
-      comments = "Please Log in to view comments or say something....";
-    } else {
-      comments =
-        <TextField
-          hintText="Type here.."
-        />;
-    }
 
     // let averageRating;
     // if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
@@ -86,7 +76,7 @@ class fullPage extends React.Component {
             </div>
           </div>
           <div className="comments-container">
-            <Comments />
+            <Comments politician_id={this.props.match.params.id} />
           </div>
         </div>
       </MuiThemeProvider>

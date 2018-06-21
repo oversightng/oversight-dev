@@ -75,6 +75,13 @@
 .comments-history {
   margin-top: 20px; }
 
+.blinker {
+  color: red;
+  animation: blinker 1s linear infinite; }
+
+.submit_button {
+  visibility: hidden; }
+
 .bg-img {
   background-image: url("https://image.ibb.co/fgN8VJ/newbg_min.jpg");
   background-repeat: no-repeat;
@@ -481,7 +488,7 @@ p.rate-tab {
     margin: 0 !important; }
 
   .fullprofile-details-cont {
-    width: 58% !important;
+    width: 50% !important;
     float: right !important; } }
 .slick-next:before, .slick-prev:before {
   color: #3c763d !important;

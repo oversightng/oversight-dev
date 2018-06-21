@@ -75,3 +75,10 @@
 .comments-history {
   margin-top: 20px;
 }
+.blinker {
+  color: red;
+  animation: blinker 1s linear infinite;
+}
+.submit_button {
+  visibility: hidden;
+}
