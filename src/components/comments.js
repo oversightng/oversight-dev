@@ -59,6 +59,7 @@ class Comments extends React.Component {
       }
       else {
         toast('Comment sent successfully');
+        window.location.reload();
       }
     })
     .catch(function (error) {
