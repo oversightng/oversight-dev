@@ -6,6 +6,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import { ToastContainer, toast } from 'react-toastify';
+import SocialButton from './SocialButton';
+
+const handleSocialLogin = (user) => {
+  console.log(user)
+}
+
+const handleSocialLoginFailure = (err) => {
+  console.error(err)
+}
 
 const url = 'https://oversight-ws.herokuapp.com/api/users';
 
@@ -18,7 +27,6 @@ class Register extends React.Component {
       lastname: '',
       email: '',
       password: '',
-      number: '',
     };
   }
 
@@ -42,9 +50,6 @@ class Register extends React.Component {
   handlePassword(e) {
     this.setState({ password: e.target.value });
   }
-  handleNumber(e) {
-    this.setState({ number: e.target.value });
-  }
 
   handleSubmit() {
     fetch(url, {
@@ -56,7 +61,6 @@ class Register extends React.Component {
         firstName: this.state.firstname,
         lastName: this.state.lastname,
         password: this.state.password,
-        phone: this.state.number,
         email: this.state.email,
       }),
     })
@@ -65,7 +69,7 @@ class Register extends React.Component {
       localStorage.setItem('token', data.token);
 
       if(!data.success) {
-        toast('Registeration was unsuccessful pls try again and fill all forms');
+        toast('Registeration was unsuccessful '+ data.message);
       }
       else {
         toast('Registeration successful, A mail has been sent for verification');
@@ -80,7 +84,6 @@ class Register extends React.Component {
       lastname: '',
       email: '',
       password: '',
-      number: '',
     });
   }
 
@@ -140,12 +143,14 @@ class Register extends React.Component {
               className="text-field"
               type="password"
             /><br />
-            <TextField
-              hintText="Phone Number"
-              value={this.state.number}
-              onChange={this.handleNumber.bind(this)}
-              className="text-field"
-            /><br />
+            <SocialButton
+              provider='facebook'
+              appId='410534052758606'
+              onLoginSuccess={handleSocialLogin}
+              onLoginFailure={handleSocialLoginFailure}
+            >
+              Login with Facebook
+            </SocialButton>
           </div>
         </Dialog>
       </div>

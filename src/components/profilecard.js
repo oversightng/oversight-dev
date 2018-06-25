@@ -211,15 +211,7 @@ class ProfileCard extends React.Component {
             <p className="card-name">{this.props.name}</p>
             <p className="card-post">{this.props.post}</p>
             <p className="card-state"><b>{this.props.state}</b></p>
-            {
-              localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
-                <p className="card-dob"><p className="login-to-rate"> Login to view rating </p></p>
-              ) : !this.props.verified ? (
-                <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
-              ) : (
-                <p className="card-dob">{averageRating}</p>
-              )
-            }
+            <p className="card-dob">{averageRating}</p>
           </div>
         </div>
         <Dialog

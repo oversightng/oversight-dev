@@ -3,9 +3,20 @@ import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import SocialLogin from 'react-social-login';
 import { ToastContainer, toast } from 'react-toastify';
+import SocialButton from './SocialButton';
 
 const url = 'https://oversight-ws.herokuapp.com/api/login';
+
+
+const handleSocialLogin = (user) => {
+  console.log(user)
+}
+
+const handleSocialLoginFailure = (err) => {
+  console.error(err)
+}
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -114,6 +125,14 @@ class SignIn extends React.Component {
               className="text-field bottom-text-field"
               type="password"
             /><br />
+            <SocialButton
+              provider='facebook'
+              appId='410534052758606'
+              onLoginSuccess={handleSocialLogin}
+              onLoginFailure={handleSocialLoginFailure}
+            >
+              Login with Facebook
+            </SocialButton>
           </div>
         </Dialog>
       </div>
