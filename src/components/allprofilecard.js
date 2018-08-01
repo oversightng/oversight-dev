@@ -163,7 +163,14 @@ class AllProfileCard extends React.Component {
             <p className="all-card-name">{this.props.name}</p>
             <p className="all-card-post">{this.props.post}</p>
             <p className="all-card-state"><b>{this.props.state}</b></p>
-            <p className="card-dob">{averageRating}</p>
+            <p className="card-dob">
+              <ReactStars
+                count={5}
+                value={this.props.averageRating}
+                size={18}
+                color2={'#ffd700'}
+              />
+            </p>
           </div>
         </div>
         <Dialog
@@ -185,7 +192,7 @@ class AllProfileCard extends React.Component {
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
               <p className="rating-cont">Rate Politician: {myrating}</p>
-              <p className="rating-cont">Avg: {averageRating}</p>
+              <p className="rating-cont">Avg: {this.props.averageRating}</p>
             </ul>
           </div>
         </Dialog>

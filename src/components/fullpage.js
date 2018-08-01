@@ -15,10 +15,13 @@ class fullPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log('component mounted');
     const REQUEST_URL = `https://oversight-ws.herokuapp.com/api/politicians/${this.props.match.params.id}`
     fetch(REQUEST_URL)
-      .then((response) => response.json() )
+      .then((response) => response.json())
         .then((json) => {
+          this.post = json.current_post.title;
+          this.avg_rating = json.rating.average;
           this.setState({
             profile: json,
           });
@@ -26,6 +29,10 @@ class fullPage extends React.Component {
         .catch((error) => {
           console.error(error);
         });
+  }
+
+  findState() {
+    console.log(this.state.profile.current_post.title);
   }
 
   reload() {
@@ -69,7 +76,7 @@ class fullPage extends React.Component {
             <div className="fullprofile-details-cont">
               <div className="all-card-details">
                 <p className="all-card-name">{this.state.profile.name}</p>
-                <p className="all-card-post">{this.state.profile.post}</p>
+                <p className="all-card-post">{this.post}</p>
                 <p className="all-card-state"><b>{this.state.profile.state}</b></p>
                 <p className="fullprofile-rating">{this.state.profile.rating}</p>
               </div>

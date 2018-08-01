@@ -1,5 +1,6 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 
 class Comments extends React.Component {
   constructor(props) {
@@ -23,11 +24,14 @@ class Comments extends React.Component {
     })
     .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         this.setState({
           comments: json,
         });
       });
+  }
+
+  handleLogin() {
+    this.props.history.push(`/login`);
   }
 
   addComment(e){
@@ -53,7 +57,6 @@ class Comments extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
-      console.log('submited');
       if(!data.success) {
         toast('Comment was not sent');
       }
@@ -78,7 +81,7 @@ class Comments extends React.Component {
     if (localStorage.getItem('email')){
       commentName = <span> {localStorage.getItem('email')} </span>
     } else {
-      commentName = <span className="blinker">Pls login to comment & view comments</span>
+      commentName = <a onClick={this.handleLogin.bind(this)} > <span className="blinker">Pls login to comment & view comments</span></a>
     }
 
     let commentContent;
@@ -128,4 +131,4 @@ class Comments extends React.Component {
   }
 }
 
-export default Comments;
+export default withRouter(Comments);

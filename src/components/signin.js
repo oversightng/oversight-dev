@@ -48,6 +48,8 @@ class SignIn extends React.Component {
       console.log(data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('id', data.user.id);
+      localStorage.setItem('name', data.user.firstName);
+      localStorage.setItem('email', data.user.email);
 
       if (!data.success) {
         toast('Wrong login details');

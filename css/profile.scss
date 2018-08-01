@@ -141,6 +141,12 @@ p.rate-tab {
   div {
     margin: 0 285px;
   }
+  div.text-field * {
+    margin: 0 !important;
+  }
+}
+.login-card {
+  border: 1px solid rgba(0,0,0,0.09);
 }
 .navigation-cont {
   width: inherit;

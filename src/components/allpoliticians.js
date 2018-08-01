@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import AllProfileCard from './allprofilecard';
+import ProfileCard from './profilecard';
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
 
@@ -50,6 +50,7 @@ class AllPoliticians extends React.Component {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
     localStorage.removeItem('id');
+    localStorage.removeItem('name');
     window.location.reload();
   }
 
@@ -72,15 +73,17 @@ class AllPoliticians extends React.Component {
     const politicians = filtered.map((politician, key) => {
       return (
         <div key={politician._id} className="all-politicians-page-card">
-          <AllProfileCard
+          <ProfileCard
             id={politician._id}
             name={politician.name}
             avatar={politician.avatar}
             post={politician.current_post.title}
             state={politician.state}
             dob={politician.dob}
-            party={politician.party}
+            party={politician.current_party.name}
+            loggedin={this.props.loggedin}
             averageRating={politician.rating.average}
+            verified={this.state.verified}
           />
         </div>
       );

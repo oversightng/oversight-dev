@@ -3,13 +3,15 @@ import Loader from 'react-loader';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
-import { toast } from 'react-toastify';
+import TextField from 'material-ui/TextField';
+import { ToastContainer, toast } from 'react-toastify';
 import {
   FacebookShareButton,
   TwitterShareButton,
   WhatsappShareButton,
 } from 'react-share';
 import { withRouter } from 'react-router-dom';
+import SignIn from './signin';
 
 const shareUrl = 'http://priincetech.com';
 
@@ -27,6 +29,7 @@ class ProfileCard extends React.Component {
       rating: '',
       childVisible: false,
       loaded: true,
+      signin: false,
     };
   }
 
@@ -64,7 +67,12 @@ class ProfileCard extends React.Component {
   }
 
   handleClose() {
+    console.log('handleclose');
     this.setState({ open: false });
+  }
+
+  handleLogin() {
+    this.props.history.push(`/login`);
   }
 
   handleRating() {
@@ -128,12 +136,14 @@ class ProfileCard extends React.Component {
       .then(response => response.json())
       .then(function (data) {
         if (!data.success) {
-          toast("Rating was not sent");
+          console.log('rating was not sent');
+          toast('Rating was not sent');
         } else {
-          toast("Rating has been sent");
+          toast('Rating has been snt');
         }
       })
       .catch(function (error) {
+        toast('Rating was not sent');
         console.log('Request failed', error);
       });
     });
@@ -151,7 +161,7 @@ class ProfileCard extends React.Component {
     };
 
     const ratingChanged = (newRating) => {
-      console.log(newRating)
+      console.log(newRating);
     }
 
 // Loggedin Rate input display
@@ -204,6 +214,7 @@ class ProfileCard extends React.Component {
 
     return (
       <div>
+        <ToastContainer />
         <div className="card-container" onClick={this.handleOpen.bind(this)}>
           <div className="card-img" style={bgimg}>
           </div>
@@ -239,22 +250,26 @@ class ProfileCard extends React.Component {
               </Loader>
               {
                 localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
-                  <p className="rating-cont">Rate Politician: <p className="login-to-rate"> Login to rate </p></p>
+                  <p className="rating-cont">Rate Politician:
+                    <p className="login-card">
+                      <a onClick={this.handleLogin.bind(this)} className="login-to-rate"> Login to rate </a>
+                    </p>
+                  </p>
                 ) : !this.props.verified ? (
                   <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
                 ) : (
                   <p className="rating-cont">Rate Politician: {myrating}</p>
                 )
               }
-              {
-                localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
-                  <p className="rating-cont">Avg:<p className="login-to-rate"> Login to view rating </p></p>
-                ) : !this.props.verified ? (
-                  <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
-                ) : (
-                  <p className="rating-cont">Avg: {averageRating}</p>
-                )
-              }
+              <p className="rating-cont">Avg:
+                <ReactStars
+                  count={5}
+                  value={this.props.averageRating}
+                  size={18}
+                  color2={'#ffd700'}
+                  edit={false}
+                />
+              </p>
               <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.id)}/></p>
             </ul>
             <FacebookShareButton url={shareUrl} />

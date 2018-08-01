@@ -109,9 +109,6 @@ div.search-input {
   padding: 0 10px;
   margin-bottom: 10px; }
 
-input[type=text] {
-  margin: 0 !important; }
-
 label {
   color: green !important;
   top: 19px !important;
@@ -346,6 +343,11 @@ p.rate-tab {
 
 .rating-cont div {
   margin: 0 285px; }
+.rating-cont div.text-field * {
+  margin: 0 !important; }
+
+.login-card {
+  border: 1px solid rgba(0, 0, 0, 0.09); }
 
 .navigation-cont {
   width: inherit;
@@ -5916,5 +5918,14 @@ p.all-card-post {
 p.all-card-state {
   margin: 0;
   font-size: 10px; }
+
+.auth-box {
+  padding-top: 50px; }
+
+.auth-label {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 20px 0; }
 
 /*# sourceMappingURL=main.css.map */

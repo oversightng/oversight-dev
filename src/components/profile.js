@@ -42,6 +42,8 @@ class Profile extends React.Component {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('id');
     window.location.reload();
   }
 
@@ -50,6 +52,7 @@ class Profile extends React.Component {
       <div className="col-md-12 topnav-container">
         <span><img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></span>
         <div style={styles.topnavIcons} className="float-left icon-menu">
+          Welcome {localStorage.getItem('name')}
           <IconMenu
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
