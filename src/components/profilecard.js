@@ -4,7 +4,6 @@ import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { ToastContainer, toast } from 'react-toastify';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -214,7 +213,6 @@ class ProfileCard extends React.Component {
 
     return (
       <div>
-        <ToastContainer />
         <div className="card-container" onClick={this.handleOpen.bind(this)}>
           <div className="card-img" style={bgimg}>
           </div>
