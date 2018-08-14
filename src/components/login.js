@@ -86,7 +86,7 @@ class Login extends React.Component {
             />
             <button className="button" type="submit">Log in</button>
           </form>
-          <p>Don't have an account? <a href="/register"><b>Register</b></a></p>
+          <p>Don't have an account? <a href="/oversight-dev/register"><b>Register</b></a></p>
         </div>
       );
     }
