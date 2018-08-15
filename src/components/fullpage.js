@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  TwitterIcon,
+} from 'react-share';
 import ReactStars from 'react-stars';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -15,13 +21,13 @@ class fullPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component mounted');
     const REQUEST_URL = `https://oversight-ws.herokuapp.com/api/politicians/${this.props.match.params.id}`
     fetch(REQUEST_URL)
       .then((response) => response.json())
         .then((json) => {
           this.post = json.current_post.title;
           this.avg_rating = json.rating.average;
+          this.current_party = json.current_party.name;
           this.setState({
             profile: json,
           });
@@ -31,39 +37,51 @@ class fullPage extends React.Component {
         });
   }
 
-  findState() {
-    console.log(this.state.profile.current_post.title);
-  }
-
   reload() {
     this.props.history.push('/');
   }
 
+  findstate() {
+    console.log(this.state.profile.dob);
+  }
+
+  getAge(dob) {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
   render() {
+    const shareUrl = `http://oversight.ng/oversight-dev/profile/${this.props.match.params.id}`;
     const bgimg = {
       backgroundImage: 'url(' + this.state.profile.avatar  + ')',
     };
 
-    // let averageRating;
-    // if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
-    //   averageRating =
-    //   <ReactStars
-    //     count={5}
-    //     value={this.state.profile.rating.average}
-    //     size={18}
-    //     color2={'#ffd700'}
-    //     edit={false}
-    //   />;
-    // } else {
-    //   averageRating =
-    //   <ReactStars
-    //     count={5}
-    //     value={this.state.profile.rating.average}
-    //     size={18}
-    //     color2={'#ffd700'}
-    //     edit={false}
-    //   />;
-    // }
+    let averageRating;
+    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
+      averageRating =
+      <ReactStars
+        count={5}
+        value={this.avg_rating}
+        size={5}
+        color2={'#ffd700'}
+        edit={false}
+      />;
+    } else {
+      averageRating =
+      <ReactStars
+        count={5}
+        value={this.avg_rating}
+        size={5}
+        color2={'#ffd700'}
+        edit={false}
+      />;
+    }
 
     return (
       <MuiThemeProvider>
@@ -75,15 +93,29 @@ class fullPage extends React.Component {
             <FontIcon className="material-icons clear-icon" onClick={this.reload.bind(this)}>clear</FontIcon>
             <div className="fullprofile-details-cont">
               <div className="all-card-details">
-                <p className="all-card-name">{this.state.profile.name}</p>
-                <p className="all-card-post">{this.post}</p>
-                <p className="all-card-state"><b>{this.state.profile.state}</b></p>
-                <p className="fullprofile-rating">{this.state.profile.rating}</p>
+                <p className="full-card-name">{this.state.profile.name}</p>
+                <p className="full-card-post">{this.post}</p>
+                <p className="full-card-state"><b>{this.state.profile.state}</b></p>
+                <p className="full-card-state"><b>{this.current_party}</b></p>
+                <p className="full-card-state"><b>{this.getAge(this.state.profile.dob)}</b></p>
+                <p className="fullprofile-rating">{averageRating}</p>
               </div>
+              <div className="comments-container">
+                <Comments politician_id={this.props.match.params.id} />
+              </div>
+              <FacebookShareButton
+               url={shareUrl}
+               className="shareIcon2"
+              >
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
+              <TwitterShareButton
+               url={shareUrl}
+               className="shareIcons"
+              >
+                <TwitterIcon size={32} round={true} />
+              </TwitterShareButton>
             </div>
-          </div>
-          <div className="comments-container">
-            <Comments politician_id={this.props.match.params.id} />
           </div>
         </div>
       </MuiThemeProvider>

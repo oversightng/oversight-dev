@@ -45,7 +45,6 @@ class SignIn extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
-      console.log(data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('id', data.user.id);
       localStorage.setItem('name', data.user.firstName);
@@ -127,14 +126,6 @@ class SignIn extends React.Component {
               className="text-field bottom-text-field"
               type="password"
             /><br />
-            <SocialButton
-              provider='facebook'
-              appId='410534052758606'
-              onLoginSuccess={handleSocialLogin}
-              onLoginFailure={handleSocialLoginFailure}
-            >
-              Login with Facebook
-            </SocialButton>
           </div>
         </Dialog>
       </div>

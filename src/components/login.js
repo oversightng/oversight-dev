@@ -39,7 +39,7 @@ class Login extends React.Component {
         toast('Wrong login details');
       } else {
         toast('Successfully logged in');
-        window.location.reload();
+        document.location.href='/';
       }
     })
     .catch(function (error) {
@@ -67,7 +67,7 @@ class Login extends React.Component {
   render() {
     let login;
     if (localStorage.getItem('email')) {
-      login = <p>You are logged in <p><a href="/">Back to Oversight</a></p></p>
+      login = <p>You are logged in <p><a href="/oversight-dev">Back to Oversight</a></p></p>
     } else {
       login = (
         <div>

@@ -81,7 +81,7 @@ class Comments extends React.Component {
     if (localStorage.getItem('email')){
       commentName = <span> {localStorage.getItem('email')} </span>
     } else {
-      commentName = <a onClick={this.handleLogin.bind(this)} > <span className="blinker">Pls login to comment & view comments</span></a>
+      commentName = <a onClick={this.handleLogin.bind(this)} > <span className="blinker">Pls login to comment</span></a>
     }
 
     let commentContent;

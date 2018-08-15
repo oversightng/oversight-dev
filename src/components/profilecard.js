@@ -4,15 +4,8 @@ import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from 'react-share';
 import { withRouter } from 'react-router-dom';
 import SignIn from './signin';
-
-const shareUrl = 'http://priincetech.com';
 
 class ProfileCard extends React.Component {
   constructor(props) {
@@ -149,8 +142,6 @@ class ProfileCard extends React.Component {
   }
 
   handleProfileClick(id) {
-    console.log('fullprofile clicked');
-    console.log(id);
     this.props.history.push(`/profile/${id}`);
   }
 
@@ -270,7 +261,6 @@ class ProfileCard extends React.Component {
               </p>
               <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.id)}/></p>
             </ul>
-            <FacebookShareButton url={shareUrl} />
           </div>
         </Dialog>
       </div>
