@@ -15,7 +15,7 @@ import ForgotPassword from './components/forgotpassword';
 import ResetPassword from './components/resetpassword';
 
 ReactDOM.render(
-  <Router basename="/">
+  <Router basename="/oversight-dev">
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/admin" component={Admin} />
