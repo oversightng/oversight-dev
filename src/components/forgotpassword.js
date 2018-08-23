@@ -42,7 +42,7 @@ class forgotPassword extends React.Component {
   }
 
   reload() {
-    this.props.history.push('/oversight-dev');
+    this.props.history.push('/');
   }
 
   handleEmail(e) {

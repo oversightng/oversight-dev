@@ -127,7 +127,7 @@ class SignIn extends React.Component {
               className="text-field bottom-text-field"
               type="password"
             /><br />
-            <p><a href="/forgot-password"> Forgot Password </a> </p>
+            <p><a href="/oversight-dev/forgot-password"> Forgot Password </a> </p>
           </div>
         </Dialog>
       </div>

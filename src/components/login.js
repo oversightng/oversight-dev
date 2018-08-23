@@ -55,7 +55,7 @@ class Login extends React.Component {
   }
 
   reload() {
-    this.props.history.push('/oversight-dev');
+    this.props.history.push('/');
   }
 
   handleEmail(e) {
@@ -88,7 +88,7 @@ class Login extends React.Component {
             <button className="button" type="submit">Log in</button>
           </form>
           <p>Don't have an account? <a href="/oversight-dev/register"><b>Register</b></a></p>
-          <p><a href="/forgot-password"> Forgot Password </a> </p>
+          <p><a href="/oversight-dev/forgot-password"> Forgot Password </a> </p>
         </div>
       );
     }
