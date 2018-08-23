@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router-dom';
 import SignIn from './signin';
+import { ToastContainer, toast } from 'react-toastify';
 
 class ProfileCard extends React.Component {
   constructor(props) {
@@ -131,7 +132,7 @@ class ProfileCard extends React.Component {
           console.log('rating was not sent');
           toast('Rating was not sent');
         } else {
-          toast('Rating has been snt');
+          toast('Rating has been sent');
         }
       })
       .catch(function (error) {

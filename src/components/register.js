@@ -6,15 +6,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import { ToastContainer, toast } from 'react-toastify';
-import SocialButton from './SocialButton';
-
-const handleSocialLogin = (user) => {
-  console.log(user)
-}
-
-const handleSocialLoginFailure = (err) => {
-  console.error(err)
-}
 
 const url = 'https://oversight-ws.herokuapp.com/api/users';
 
@@ -67,7 +58,6 @@ class Register extends React.Component {
     .then(response => response.json())
     .then(function (data) {
       localStorage.setItem('token', data.token);
-
       if(!data.success) {
         toast('Registeration was unsuccessful '+ data.message);
       }
@@ -76,6 +66,7 @@ class Register extends React.Component {
       }
     })
     .catch(function (error) {
+      toast('Really Sorry your Request Failed, Please try again');
       console.log('Request failed', error);
     });
 
@@ -143,14 +134,6 @@ class Register extends React.Component {
               className="text-field"
               type="password"
             /><br />
-            <SocialButton
-              provider='facebook'
-              appId='410534052758606'
-              onLoginSuccess={handleSocialLogin}
-              onLoginFailure={handleSocialLoginFailure}
-            >
-              Login with Facebook
-            </SocialButton>
           </div>
         </Dialog>
       </div>

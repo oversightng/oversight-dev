@@ -30,6 +30,7 @@ class Login extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
+      localStorage.setItem('user', data.ratings)
       localStorage.setItem('token', data.token);
       localStorage.setItem('id', data.user.id);
       localStorage.setItem('name', data.user.firstName);
@@ -54,7 +55,7 @@ class Login extends React.Component {
   }
 
   reload() {
-    this.props.history.push('/');
+    this.props.history.push('/oversight-dev');
   }
 
   handleEmail(e) {
@@ -87,6 +88,7 @@ class Login extends React.Component {
             <button className="button" type="submit">Log in</button>
           </form>
           <p>Don't have an account? <a href="/oversight-dev/register"><b>Register</b></a></p>
+          <p><a href="/forgot-password"> Forgot Password </a> </p>
         </div>
       );
     }

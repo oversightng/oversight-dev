@@ -1,12 +1,15 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
+import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
+
+const url = 'https://oversight-ws.herokuapp.com/api/users';
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
       firstname: '',
       lastname: '',
       email: '',
@@ -15,13 +18,44 @@ class SignUp extends React.Component {
   }
 
   handleSubmit() {
-    console.log('nnn');
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: this.state.firstname,
+        lastName: this.state.lastname,
+        password: this.state.password,
+        email: this.state.email,
+      }),
+    })
+    .then(response => response.json())
+    .then(function (data) {
+      localStorage.setItem('token', data.token);
+      if(!data.success) {
+        toast('Registeration was unsuccessful '+ data.message);
+      }
+      else {
+        toast('Registeration successful, A mail has been sent for verification');
+      }
+    })
+    .catch(function (error) {
+      toast('Really Sorry your Request Failed, Please try again');
+      console.log('Request failed', error);
+    });
+
+    this.setState({
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+    });
   }
 
   reload() {
     this.props.history.push('/');
   }
-
   handleFirstname(e) {
     this.setState({ firstname: e.target.value });
   }
@@ -43,6 +77,7 @@ class SignUp extends React.Component {
     return (
       <MuiThemeProvider>
         <div id="full-profile">
+          <ToastContainer />
           <FontIcon className="material-icons clear-icon" onClick={this.reload.bind(this)}>clear</FontIcon>
           <div className="col-md-6 col-md-offset-3 auth-box">
             <div className="col-md-6 col-md-offset-3">
@@ -56,14 +91,14 @@ class SignUp extends React.Component {
                 <input
                   type="text"
                   placeholder="First Name"
-                  value={this.state.email}
+                  value={this.state.firstname}
                   onChange={this.handleFirstname.bind(this)}
                   style={divStyle}
                 />
                 <input
                   type="text"
                   placeholder="Last Name"
-                  value={this.state.email}
+                  value={this.state.lastname}
                   onChange={this.handleLastname.bind(this)}
                 />
                 <input
@@ -78,7 +113,7 @@ class SignUp extends React.Component {
                   value={this.state.password}
                   onChange={this.handlePassword.bind(this)}
                 />
-                <button className="button" type="submit">Register</button>
+                <button className="button" type="submit" onClick={this.handleSubmit.bind(this)}>Register</button>
               </form>
               <p>Have an account? <a href="/oversight-dev/login"><b>Login</b></a></p>
             </div>
@@ -89,4 +124,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

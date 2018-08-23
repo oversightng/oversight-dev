@@ -418,6 +418,11 @@ p.rate-tab {
 @keyframes blinker {
   50% {
     opacity: 0; } }
+.welcome-span {
+  float: left;
+  margin: 15px 10px 0 0;
+  font-weight: bolder; }
+
 @media only screen and (max-width: 414px) {
   .bg-img {
     background-position: center;
@@ -543,7 +548,7 @@ p.rate-tab {
 
   p.full-card-state {
     font-weight: bolder;
-    font-size: 14px;
+    font-size: 12px;
     margin: 0; }
 
   .shareIcons {

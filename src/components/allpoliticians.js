@@ -92,7 +92,10 @@ class AllPoliticians extends React.Component {
     return (
       <MuiThemeProvider>
         <div className="col-md-12 all-politicians-cont">
-          <div className="col-md-12">
+          <div className="col-md-2">
+            <span><a href="http://oversight.ng/oversight-dev"> <img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></a></span>
+          </div>
+          <div className="col-md-10">
             <AutoComplete
               className="search-input"
               style={searchStyle}

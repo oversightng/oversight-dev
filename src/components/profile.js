@@ -50,9 +50,9 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="col-md-12 topnav-container">
-        <span><img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></span>
+        <span><a href="http://oversight.ng"> <img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></a></span>
         <div style={styles.topnavIcons} className="float-left icon-menu">
-          Welcome {localStorage.getItem('name')}
+          <div className="welcome-span"> Welcome {localStorage.getItem('name')}</div>
           <IconMenu
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}

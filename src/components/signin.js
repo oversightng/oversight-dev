@@ -54,6 +54,7 @@ class SignIn extends React.Component {
         toast('Wrong login details');
       } else {
         toast('Successfully logged in');
+        return;
         window.location.reload();
       }
     })
@@ -126,6 +127,7 @@ class SignIn extends React.Component {
               className="text-field bottom-text-field"
               type="password"
             /><br />
+            <p><a href="/forgot-password"> Forgot Password </a> </p>
           </div>
         </Dialog>
       </div>
