@@ -69,7 +69,8 @@ class SignIn extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true });
+    document.location.href="/oversight-dev/login";
+    // this.setState({ open: true });
   }
 
   handleClose() {
