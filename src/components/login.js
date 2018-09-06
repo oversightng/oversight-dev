@@ -40,7 +40,7 @@ class Login extends React.Component {
         toast('Wrong login details');
       } else {
         toast('Successfully logged in');
-        document.location.href='/oversight-dev';
+        document.location.href='/oversight-rate';
       }
     })
     .catch(function (error) {
@@ -68,7 +68,7 @@ class Login extends React.Component {
   render() {
     let login;
     if (localStorage.getItem('email')) {
-      login = <p>You are logged in <p><a href="/oversight-dev">Back to Oversight</a></p></p>
+      login = <p>You are logged in <p><a href="/oversight-rate">Back to Oversight</a></p></p>
     } else {
       login = (
         <div>
@@ -87,8 +87,8 @@ class Login extends React.Component {
             />
             <button className="button" type="submit">Log in</button>
           </form>
-          <p>Don't have an account? <a href="/oversight-dev/register"><b>Register</b></a></p>
-          <p><a href="/oversight-dev/forgot-password"> Forgot Password </a> </p>
+          <p>Don't have an account? <a href="/oversight-rate/register"><b>Register</b></a></p>
+          <p><a href="/oversight-rate/forgot-password"> Forgot Password </a> </p>
         </div>
       );
     }

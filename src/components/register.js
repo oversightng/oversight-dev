@@ -22,7 +22,7 @@ class Register extends React.Component {
   }
 
   handleOpen() {
-    document.location.href="/oversight-dev/register";
+    document.location.href="/oversight-rate/register";
     // this.setState({ open: true });
   }
 

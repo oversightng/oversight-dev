@@ -57,7 +57,7 @@ class fullPage extends React.Component {
   }
 
   render() {
-    const shareUrl = `http://oversight.ng/oversight-dev/profile/${this.props.match.params.id}`;
+    const shareUrl = `http://oversight.ng/oversight-rate/profile/${this.props.match.params.id}`;
     const bgimg = {
       backgroundImage: 'url(' + this.state.profile.avatar  + ')',
     };

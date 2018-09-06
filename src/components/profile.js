@@ -60,12 +60,12 @@ class Profile extends React.Component {
           >
             {
               this.state.admin ? (
-                <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+                <MenuItem primaryText="Admin Page" href="/oversight-rate/admin" />
               ) : (
                 <MenuItem primaryText="Edit Profile" href="" />
               )
             }
-            <MenuItem primaryText="All Politicians" href="/oversight-dev/all" />
+            <MenuItem primaryText="All Politicians" href="/oversight-rate/all" />
             <MenuItem primaryText="Sign out" onClick={this.logout.bind(this)} />
           </IconMenu>
         </div>

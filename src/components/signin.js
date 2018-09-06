@@ -69,7 +69,7 @@ class SignIn extends React.Component {
   }
 
   handleOpen() {
-    document.location.href="/oversight-dev/login";
+    document.location.href="/oversight-rate/login";
     // this.setState({ open: true });
   }
 
@@ -128,7 +128,7 @@ class SignIn extends React.Component {
               className="text-field bottom-text-field"
               type="password"
             /><br />
-            <p><a href="/oversight-dev/forgot-password"> Forgot Password </a> </p>
+            <p><a href="/oversight-rate/forgot-password"> Forgot Password </a> </p>
           </div>
         </Dialog>
       </div>

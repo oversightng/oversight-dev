@@ -93,7 +93,7 @@ class AllPoliticians extends React.Component {
       <MuiThemeProvider>
         <div className="col-md-12 all-politicians-cont">
           <div className="col-md-2">
-            <span><a href="http://oversight.ng/oversight-dev"> <img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></a></span>
+            <span><a href="http://oversight.ng/oversight-rate"> <img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></a></span>
           </div>
           <div className="col-md-10">
             <AutoComplete
@@ -113,7 +113,7 @@ class AllPoliticians extends React.Component {
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                 targetOrigin={{ horizontal: 'right', vertical: 'top' }}
               >
-                <MenuItem primaryText="Admin Page" href="/oversight-dev/admin" />
+                <MenuItem primaryText="Admin Page" href="/oversight-rate/admin" />
                 <MenuItem primaryText="APC" />
                 <MenuItem primaryText="PDP" />
                 <MenuItem primaryText="Most Liked" />

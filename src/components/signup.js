@@ -115,7 +115,7 @@ class SignUp extends React.Component {
                 />
                 <button className="button" type="submit" onClick={this.handleSubmit.bind(this)}>Register</button>
               </form>
-              <p>Have an account? <a href="/oversight-dev/login"><b>Login</b></a></p>
+              <p>Have an account? <a href="/oversight-rate/login"><b>Login</b></a></p>
             </div>
           </div>
         </div>

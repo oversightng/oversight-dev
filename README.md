@@ -20,7 +20,7 @@ You can also:
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ cd oversight-dev
+$ cd oversight-rate
 $ npm install
 $ npm start
 ```
@@ -29,5 +29,5 @@ For production environments...
 
 ```sh
 $ npm run build
-$ git push https://github.com/oversightng/oversight-dev
+$ git push https://github.com/oversightng/oversight-rate
 ```
