@@ -59,6 +59,8 @@ class Register extends React.Component {
     .then(response => response.json())
     .then(function (data) {
       localStorage.setItem('token', data.token);
+      console.log(data);
+      return;
       if(!data.success) {
         toast('Registeration was unsuccessful '+ data.message);
       }

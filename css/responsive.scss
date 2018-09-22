@@ -57,7 +57,7 @@
   /*****************************************
               PROFILE CARD
   *****************************************/
-  .all-card-container {
+  .card-container {
     margin: 0 !important;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 15px rgba(0, 0, 0, .2);
@@ -67,23 +67,23 @@
     float: left;
     margin: 0 0 5px 10px;
   }
-  .all-card-img {
+  .card-img {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 4em !important;
   }
-  .all-card-details{
+  .card-details{
     background-color: white;
     padding: 4px !important;
     height: 80px !important;
   }
-  p.all-card-name {
+  p.card-name {
     font-weight: bold;
     margin: 0;
     font-size: 8px !important;
   }
-  p.all-card-post {
+  p.card-post {
     margin: 0;
     font-weight: bold;
     font-size: 6px !important;

@@ -5,9 +5,9 @@ import FontIcon from 'material-ui/FontIcon';
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
 
-const url = 'https://oversight-ws.herokuapp.com/api/users';
+const url = `https://oversight-ws.herokuapp.com/api/users/${localStorage.getItem('id')}`;
 
-class SignUp extends React.Component {
+class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,15 +19,38 @@ class SignUp extends React.Component {
     };
   }
 
+  componentDidMount(){
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+      .then((response) => response.json() )
+        .then((json) => {
+          this.setState({
+            firstname: json.firstName,
+            lastname: json.lastName,
+            email: json.email,
+            password: json.password,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.setState({
       loaded: false,
     });
     fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
       },
       body: JSON.stringify({
         firstName: this.state.firstname,
@@ -38,13 +61,12 @@ class SignUp extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
-      console.log(data);
-      localStorage.setItem('token', data.token);
       if(!data.success) {
-        toast('Registeration was unsuccessful '+ data.message);
+        toast('Profile edit was unsuccessful '+ data.message);
       }
       else {
-        toast('Registeration successful, A mail has been sent for verification');
+        toast('Profile edit successful');
+        document.location.href='/edit-profile';
       }
     })
     .catch(function (error) {
@@ -96,38 +118,37 @@ class SignUp extends React.Component {
               <a href="http://oversight.ng"><img src="http://oi64.tinypic.com/oa6kax.jpg"/></a>
             </div>
             <div className="col-md-12 auth-label">
-              REGISTER
+              EDIT PROFILE
             </div>
             <div className="col-md-12">
               <form>
                 <input
                   type="text"
-                  placeholder="First Name"
+                  placeholder={this.state.firstname}
                   value={this.state.firstname}
                   onChange={this.handleFirstname.bind(this)}
                   style={divStyle}
                 />
                 <input
                   type="text"
-                  placeholder="Last Name"
+                  placeholder={this.state.lastname}
                   value={this.state.lastname}
                   onChange={this.handleLastname.bind(this)}
                 />
                 <input
                   type="email"
-                  placeholder="Email Address"
+                  placeholder={this.state.email}
                   value={this.state.email}
                   onChange={this.handleEmail.bind(this)}
                 />
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="Change Password"
                   value={this.state.password}
                   onChange={this.handlePassword.bind(this)}
                 />
-                <button className="button" type="submit" onClick={this.handleSubmit.bind(this)}>Register</button>
+                <button className="button" type="submit" onClick={this.handleSubmit.bind(this)}>Update Profile</button>
               </form>
-              <p>Have an account? <a href="/oversight-rate/login"><b>Login</b></a></p>
             </div>
           </div>
         </div>
@@ -136,4 +157,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default withRouter(SignUp);
+export default withRouter(EditProfile);

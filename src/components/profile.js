@@ -62,7 +62,7 @@ class Profile extends React.Component {
               this.state.admin ? (
                 <MenuItem primaryText="Admin Page" href="/oversight-rate/admin" />
               ) : (
-                <MenuItem primaryText="Edit Profile" href="" />
+                <MenuItem primaryText="Edit Profile" href="/oversight-rate/edit-profile" />
               )
             }
             <MenuItem primaryText="All Politicians" href="/oversight-rate/all" />

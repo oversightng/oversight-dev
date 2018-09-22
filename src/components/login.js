@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from 'react-loader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,11 +14,15 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      loaded: true,
     };
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({
+      loaded: false,
+    });
     fetch(url, {
       method: 'POST',
       headers: {
@@ -100,7 +105,12 @@ class Login extends React.Component {
     return (
       <MuiThemeProvider>
         <div id="full-profile">
-          <ToastContainer />
+          <Loader loaded={this.state.loaded} className="loader" lines={15} length={5} width={3} radius={30}
+            corners={1} rotate={0} direction={1} color="green" speed={3}
+            trail={60} shadow={false} hwaccel={false} className="spinner"
+            zIndex={2e9}>
+            <ToastContainer />
+          </Loader>
           <FontIcon className="material-icons clear-icon" onClick={this.reload.bind(this)}>clear</FontIcon>
             <div className="col-md-6 col-md-offset-3 auth-box">
               <div className="col-md-6 col-md-offset-3">

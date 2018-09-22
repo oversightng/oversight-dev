@@ -13,6 +13,7 @@ import Login from './components/login';
 import SignUp from './components/signup';
 import ForgotPassword from './components/forgotpassword';
 import ResetPassword from './components/resetpassword';
+import EditProfile from './components/editprofile';
 
 ReactDOM.render(
   <Router basename="/oversight-rate">
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path="/profile/:id" component={FullPage} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={SignUp} />
+      <Route path="/edit-profile" component={EditProfile} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
     </Switch>

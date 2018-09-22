@@ -180,6 +180,25 @@ class PoliticiansTable extends React.Component {
     });
   }
 
+  clearRating(id) {
+    const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}/rating?all=true`;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then((res) => {
+      if (res.success) {
+        toast('Politician ratings not deleted');
+      } else {
+        window.location.reload();
+        toast('Politician ratings deleted');
+      }
+    });
+  }
+
   deletePolitician(id) {
     const url = `https://oversight-ws.herokuapp.com/api/politicians/${id}`;
     fetch(url, {
@@ -242,6 +261,7 @@ class PoliticiansTable extends React.Component {
           <td>{p.state || 'No data'}</td>
           <td>{p.current_post.title || 'No data'}</td>
           <td>{p.rating.average || 'No data'}</td>
+          <td><a onClick={this.clearRating.bind(this, p._id)}>Clear rating</a></td>
           <UpdatePolitician
             _id={p._id}
             name={p.name}
@@ -372,6 +392,7 @@ class PoliticiansTable extends React.Component {
               <th>State</th>
               <th>Position</th>
               <th>Rating</th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
