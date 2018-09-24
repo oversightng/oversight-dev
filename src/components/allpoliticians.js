@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import ProfileCard from './profilecard';
+import ProfileCard from './allprofilecard';
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
 

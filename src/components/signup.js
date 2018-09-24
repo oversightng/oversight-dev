@@ -1,8 +1,8 @@
 import React from 'react';
 import Loader from 'react-loader';
+import { ToastContainer, toast } from 'react-toastify';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
-import { ToastContainer, toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
 
 const url = 'https://oversight-ws.herokuapp.com/api/users';
@@ -41,10 +41,13 @@ class SignUp extends React.Component {
       console.log(data);
       localStorage.setItem('token', data.token);
       if(!data.success) {
+        console.log('registration unsuccessful')
         toast('Registeration was unsuccessful '+ data.message);
       }
       else {
+        console.log('registration successful')
         toast('Registeration successful, A mail has been sent for verification');
+        document.location.href='/oversight-rate/login';
       }
     })
     .catch(function (error) {
@@ -99,7 +102,7 @@ class SignUp extends React.Component {
               REGISTER
             </div>
             <div className="col-md-12">
-              <form>
+              <form onSubmit={this.handleSubmit.bind(this)}>
                 <input
                   type="text"
                   placeholder="First Name"
@@ -125,7 +128,7 @@ class SignUp extends React.Component {
                   value={this.state.password}
                   onChange={this.handlePassword.bind(this)}
                 />
-                <button className="button" type="submit" onClick={this.handleSubmit.bind(this)}>Register</button>
+                <button className="button" type="submit">Register</button>
               </form>
               <p>Have an account? <a href="/oversight-rate/login"><b>Login</b></a></p>
             </div>

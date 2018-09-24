@@ -1,10 +1,10 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { ToastContainer, toast } from 'react-toastify';
 import PoliticiansTable from './admin/politicians-table';
 import UsersTable from './admin/users-table';
 import Dashboard from './admin/dashboard';
 import Settings from './admin/settings';
-
 
 class Admin extends React.Component {
   constructor(props) {
@@ -54,6 +54,7 @@ class Admin extends React.Component {
       <MuiThemeProvider>
         <div className="admin-cont col-md-12">
           <div className="sidebar row col-md-3">
+            <ToastContainer />
             <ul className="sidebar-cont">
               <li><a href="/oversight-rate"><img src="http://oi64.tinypic.com/oa6kax.jpg"/></a></li>
               <li onClick={this.showDashboard.bind(this)} >Dashboard</li>

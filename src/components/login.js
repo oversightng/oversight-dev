@@ -1,8 +1,8 @@
 import React from 'react';
 import Loader from 'react-loader';
+import { ToastContainer, toast } from 'react-toastify';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
-import { ToastContainer, toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
 
 

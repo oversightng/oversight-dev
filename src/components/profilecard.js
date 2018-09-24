@@ -3,10 +3,7 @@ import Loader from 'react-loader';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router-dom';
-import SignIn from './signin';
-import { ToastContainer, toast } from 'react-toastify';
 
 class ProfileCard extends React.Component {
   constructor(props) {
@@ -260,7 +257,7 @@ class ProfileCard extends React.Component {
                   edit={false}
                 />
               </p>
-              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.id)}/></p>
+              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.name)}/></p>
             </ul>
           </div>
         </Dialog>

@@ -1,7 +1,9 @@
 import React from 'react';
+import Loader from 'react-loader';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
-import { ToastContainer, toast } from 'react-toastify';
+import RaisedButton from 'material-ui/RaisedButton';
+import { withRouter } from 'react-router-dom';
 
 class AllProfileCard extends React.Component {
   constructor(props) {
@@ -15,7 +17,39 @@ class AllProfileCard extends React.Component {
       showLegalCases: false,
       showBudget: false,
       rating: '',
+      childVisible: false,
+      loaded: true,
+      signin: false,
     };
+  }
+
+  resendLink(){
+    this.setState({
+      loaded: false,
+    });
+    console.log('Resend link clicked');
+    const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/resend';
+    return fetch(REQUEST_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem('email'),
+      }),
+    })
+    .then(response => response.json())
+    .then(function (data) {
+      if(!data.success) {
+        toast('Resend link was unsuccessful');
+      }
+      else {
+        toast("Email Verification link was sent Successfully");
+      }
+    })
+    .catch(function (error) {
+      console.log('Request failed', error);
+    });
   }
 
   handleOpen() {
@@ -23,7 +57,12 @@ class AllProfileCard extends React.Component {
   }
 
   handleClose() {
+    console.log('handleclose');
     this.setState({ open: false });
+  }
+
+  handleLogin() {
+    this.props.history.push(`/login`);
   }
 
   handleRating() {
@@ -87,15 +126,21 @@ class AllProfileCard extends React.Component {
       .then(response => response.json())
       .then(function (data) {
         if (!data.success) {
-          toast("Rating was not sent");
+          console.log('rating was not sent');
+          toast('Rating was not sent');
         } else {
-          toast("Rating has been sent");
+          toast('Rating has been sent');
         }
       })
       .catch(function (error) {
+        toast('Rating was not sent');
         console.log('Request failed', error);
       });
     });
+  }
+
+  handleProfileClick(id) {
+    this.props.history.push(`/profile/${id}`);
   }
 
   render() {
@@ -104,7 +149,7 @@ class AllProfileCard extends React.Component {
     };
 
     const ratingChanged = (newRating) => {
-      console.log(newRating)
+      console.log(newRating);
     }
 
 // Loggedin Rate input display
@@ -118,7 +163,7 @@ class AllProfileCard extends React.Component {
 
 // Loggedin Your Rating display
     let myrating;
-    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null ) {
+    if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null) {
       myrating = null;
     } else {
       myrating =
@@ -140,6 +185,7 @@ class AllProfileCard extends React.Component {
         value={this.props.averageRating}
         size={18}
         color2={'#ffd700'}
+        edit={false}
       />;
     } else {
       averageRating =
@@ -148,6 +194,7 @@ class AllProfileCard extends React.Component {
         value={this.props.averageRating}
         size={18}
         color2={'#ffd700'}
+        edit={false}
       />;
     }
 
@@ -155,7 +202,6 @@ class AllProfileCard extends React.Component {
 
     return (
       <div>
-        <ToastContainer />
         <div className="all-card-container" onClick={this.handleOpen.bind(this)}>
           <div className="all-card-img" style={bgimg}>
           </div>
@@ -163,14 +209,7 @@ class AllProfileCard extends React.Component {
             <p className="all-card-name">{this.props.name}</p>
             <p className="all-card-post">{this.props.post}</p>
             <p className="all-card-state"><b>{this.props.state}</b></p>
-            <p className="card-dob">
-              <ReactStars
-                count={5}
-                value={this.props.averageRating}
-                size={18}
-                color2={'#ffd700'}
-              />
-            </p>
+            <p className="all-card-dob">{averageRating}</p>
           </div>
         </div>
         <Dialog
@@ -191,8 +230,34 @@ class AllProfileCard extends React.Component {
               <li>State: <b>{this.props.state}</b></li>
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
-              <p className="rating-cont">Rate Politician: {myrating}</p>
-              <p className="rating-cont">Avg: {this.props.averageRating}</p>
+              <Loader loaded={this.state.loaded} className="loader" lines={15} length={5} width={3} radius={30}
+                corners={1} rotate={0} direction={1} color="green" speed={3}
+                trail={60} shadow={false} hwaccel={false} className="spinner"
+                zIndex={2e9}>
+              </Loader>
+              {
+                localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
+                  <p className="rating-cont">Rate Politician:
+                    <p className="login-card">
+                      <a onClick={this.handleLogin.bind(this)} className="login-to-rate"> Login to rate </a>
+                    </p>
+                  </p>
+                ) : !this.props.verified ? (
+                  <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
+                ) : (
+                  <p className="rating-cont">Rate Politician: {myrating}</p>
+                )
+              }
+              <p className="rating-cont">Avg:
+                <ReactStars
+                  count={5}
+                  value={this.props.averageRating}
+                  size={18}
+                  color2={'#ffd700'}
+                  edit={false}
+                />
+              </p>
+              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.id)}/></p>
             </ul>
           </div>
         </Dialog>
@@ -201,4 +266,4 @@ class AllProfileCard extends React.Component {
   }
 }
 
-export default AllProfileCard;
+export default withRouter(AllProfileCard);

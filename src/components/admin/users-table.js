@@ -2,6 +2,7 @@ import React from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
+import { ToastContainer, toast } from 'react-toastify';
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/users';
 
@@ -63,6 +64,25 @@ class UsersTable extends React.Component {
 
   handleChange = (event, index, value) => this.setState({value});
 
+  deleteUser(id) {
+    const url = `https://oversight-ws.herokuapp.com/api/users/${id}`;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+    .then((res) => {
+      if (res.success) {
+        toast('User not deleted');
+      } else {
+        // window.location.reload();
+        toast('User deleted');
+      }
+    });
+  }
+
   render() {
     const searchStyle = {
       color: '#3c763d',
@@ -86,12 +106,13 @@ class UsersTable extends React.Component {
               <MenuItem value={3} primaryText="Admin" />
             </DropDownMenu>
           </td>
-          <td><a>X</a></td>
+          <td><a onClick={this.deleteUser.bind(this, p._id)}>X</a></td>
         </tr>
       );
     });
     return (
       <div className="col-md-9 admin-table">
+        <ToastContainer />
         <AutoComplete
           className="search-input"
           style={searchStyle}
