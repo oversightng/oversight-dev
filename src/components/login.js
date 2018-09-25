@@ -19,10 +19,10 @@ class Login extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.setState({
-      loaded: false,
+      loaded: true,
     });
+    e.preventDefault();
     fetch(url, {
       method: 'POST',
       headers: {
@@ -44,12 +44,14 @@ class Login extends React.Component {
       if (!data.success) {
         toast('Wrong login details');
       } else {
-        toast('Successfully logged in');
-        document.location.href='/oversight-rate';
+        toast('Successfully logged in', {
+          onOpen: ({ foo }) => console.log('open'),
+          onClose: ({ foo }) => console.log('close')
+        });
       }
     })
     .catch(function (error) {
-      toast('Wrong login details');
+      toast('Request failed');
       console.log('Request failed', error);
     });
 

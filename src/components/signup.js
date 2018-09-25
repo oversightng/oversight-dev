@@ -21,9 +21,6 @@ class SignUp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({
-      loaded: false,
-    });
     fetch(url, {
       method: 'POST',
       headers: {
@@ -38,16 +35,13 @@ class SignUp extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
-      console.log(data);
-      localStorage.setItem('token', data.token);
       if(!data.success) {
-        console.log('registration unsuccessful')
+        console.log('registration unsuccessful');
         toast('Registeration was unsuccessful '+ data.message);
       }
       else {
-        console.log('registration successful')
+        console.log('registration successful');
         toast('Registeration successful, A mail has been sent for verification');
-        document.location.href='/oversight-rate/login';
       }
     })
     .catch(function (error) {
@@ -80,10 +74,45 @@ class SignUp extends React.Component {
   }
 
   render() {
+    let register;
     const divStyle = {
       marginBottom: '10px',
     };
-
+    if (localStorage.getItem('email')) {
+      register = <p>Submitted <p><a href="/oversight-rate/login">Login to Oversight</a></p></p>
+    } else {
+      register = (
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={this.state.firstname}
+            onChange={this.handleFirstname.bind(this)}
+            style={divStyle}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={this.state.lastname}
+            onChange={this.handleLastname.bind(this)}
+          />
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={this.state.email}
+            onChange={this.handleEmail.bind(this)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handlePassword.bind(this)}
+          />
+          <button className="button" type="submit">Register</button>
+          <p>Have an account? <a href="/oversight-rate/login"><b>Login</b></a></p>
+        </form>
+      );
+    }
     return (
       <MuiThemeProvider>
         <div id="full-profile">
@@ -102,35 +131,7 @@ class SignUp extends React.Component {
               REGISTER
             </div>
             <div className="col-md-12">
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  value={this.state.firstname}
-                  onChange={this.handleFirstname.bind(this)}
-                  style={divStyle}
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  value={this.state.lastname}
-                  onChange={this.handleLastname.bind(this)}
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  value={this.state.email}
-                  onChange={this.handleEmail.bind(this)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.handlePassword.bind(this)}
-                />
-                <button className="button" type="submit">Register</button>
-              </form>
-              <p>Have an account? <a href="/oversight-rate/login"><b>Login</b></a></p>
+              {register}
             </div>
           </div>
         </div>
