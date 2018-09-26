@@ -27,6 +27,9 @@ ReactDOM.render(
       <Route path="/edit-profile" component={EditProfile} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
+      <Route exact path="/" component={App} />
+      <Route exact path="/" component={App} />
+
     </Switch>
   </Router>,
   document.getElementById('root'),

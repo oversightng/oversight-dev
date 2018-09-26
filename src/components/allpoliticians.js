@@ -1,5 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Sidebar from "react-sidebar";
 import AutoComplete from 'material-ui/AutoComplete';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -16,7 +17,13 @@ class AllPoliticians extends React.Component {
       data: [],
       input: '',
       searchText: '',
+      sidebarOpen: false,
     };
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+  }
+
+  onSetSidebarOpen(open) {
+    this.setState({ sidebarOpen: open });
   }
 
   componentDidMount(){
@@ -69,7 +76,6 @@ class AllPoliticians extends React.Component {
     const filtered = this.state.data.filter((p) => {
       return (p.name.toLowerCase().indexOf(this.state.input) > -1);
     });
-
     const politicians = filtered.map((politician, key) => {
       return (
         <div key={politician._id} className="all-politicians-page-card">
@@ -88,13 +94,37 @@ class AllPoliticians extends React.Component {
         </div>
       );
     });
+    const drawList =
+      (
+        <ul className="draw-list">
+          <li>Home</li>
+          <li>Party</li>
+          <li>State</li>
+          <li>Gender</li>
+          <li>Ethnicity</li>
+          <li>Profile</li>
+          <li>Logout</li>
+        </ul>
+      );
 
     return (
       <MuiThemeProvider>
-        <div className="col-md-12 all-politicians-cont">
+        <div className="col-md-12">
           <div className="col-md-2">
-            <span><a href="http://oversight.ng/oversight-rate"> <img alt="logo thumbnail" src="https://i.imgur.com/smX5Xaw.png" className="logo-thumb" /></a></span>
           </div>
+          <Sidebar
+            sidebar={drawList}
+            open={this.state.sidebarOpen}
+            onSetOpen={this.onSetSidebarOpen}
+            sidebarClassName="draw-sidebar"
+            rootClassName="draw-container"
+          >
+            <button className="menu-button" onClick={() => this.onSetSidebarOpen(true)}>
+              <div className="menu-line"></div>
+              <div className="menu-line"></div>
+              <div className="menu-line"></div>
+            </button>
+          </Sidebar>
           <div className="col-md-10">
             <AutoComplete
               className="search-input"

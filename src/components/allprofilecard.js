@@ -242,7 +242,7 @@ class AllProfileCard extends React.Component {
                       <a onClick={this.handleLogin.bind(this)} className="login-to-rate"> Login to rate </a>
                     </p>
                   </p>
-                ) : !this.props.verified ? (
+                ) : this.props.verified ? (
                   <p className="card-dob"><p className="login-to-rate"> Please Verify Account to view rating. Check your mail or <a onClick={this.resendLink.bind(this)}> Resend Verification link</a> </p></p>
                 ) : (
                   <p className="rating-cont">Rate Politician: {myrating}</p>
@@ -257,7 +257,7 @@ class AllProfileCard extends React.Component {
                   edit={false}
                 />
               </p>
-              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.id)}/></p>
+              <p><RaisedButton label="More" onClick={this.handleProfileClick.bind(this, this.props.name)}/></p>
             </ul>
           </div>
         </Dialog>
