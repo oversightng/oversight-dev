@@ -1,16 +1,17 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Sidebar from "react-sidebar";
+import Sidebar from 'react-sidebar';
+import { withRouter } from 'react-router-dom';
 import AutoComplete from 'material-ui/AutoComplete';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import ProfileCard from './allprofilecard';
+import ProfileCard from '../allprofilecard';
 
-const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
+const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians?numOfHighestRates=30';
 
-class AllPoliticians extends React.Component {
+class HighestRatedPoliticians extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -187,4 +188,4 @@ class AllPoliticians extends React.Component {
   }
 }
 
-export default AllPoliticians;
+export default withRouter(HighestRatedPoliticians);

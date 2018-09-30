@@ -1,16 +1,17 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Sidebar from "react-sidebar";
+import Sidebar from 'react-sidebar';
+import { withRouter } from 'react-router-dom';
 import AutoComplete from 'material-ui/AutoComplete';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import ProfileCard from './allprofilecard';
+import ProfileCard from '../allprofilecard';
 
 const REQUEST_URL = 'https://oversight-ws.herokuapp.com/api/politicians';
 
-class AllPoliticians extends React.Component {
+class GenderPoliticians extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,10 +100,10 @@ class AllPoliticians extends React.Component {
       },
     };
     const mapped_data = this.state.data.map((p) => {
-      return p.name.toLowerCase();
+      return p.sex.toLowerCase();
     });
     const filtered = this.state.data.filter((p) => {
-      return (p.name.toLowerCase().indexOf(this.state.input) > -1);
+      return (p.sex.toLowerCase().indexOf(this.state.input) > -1);
     });
     const politicians = filtered.map((politician, key) => {
       return (
@@ -157,7 +158,7 @@ class AllPoliticians extends React.Component {
             <AutoComplete
               className="search-input"
               style={searchStyle}
-              floatingLabelText="Search Politician"
+              floatingLabelText="Search Politician's Gender"
               filter={AutoComplete.fuzzyFilter}
               dataSource={mapped_data}
               maxSearchResults={5}
@@ -187,4 +188,4 @@ class AllPoliticians extends React.Component {
   }
 }
 
-export default AllPoliticians;
+export default withRouter(GenderPoliticians);

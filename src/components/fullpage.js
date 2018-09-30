@@ -28,6 +28,7 @@ class fullPage extends React.Component {
           this.post = json.current_post.title;
           this.avg_rating = json.rating.average;
           this.current_party = json.current_party.name;
+          this.previous_party = json.party_history.name;
           this.setState({
             profile: json,
           });
@@ -96,8 +97,9 @@ class fullPage extends React.Component {
                 <p className="full-card-name">{this.state.profile.name}</p>
                 <p className="full-card-post">{this.post}</p>
                 <p className="full-card-state"><b>{this.state.profile.state}</b></p>
-                <p className="full-card-state"><b>{this.current_party}</b></p>
-                <p className="full-card-state"><b>{this.getAge(this.state.profile.dob)}</b></p>
+                <p className="full-card-state"><b>Current Party: {this.current_party}</b></p>
+                <p className="full-card-state"><b>Previous Party: {this.previous_party}</b></p>
+                <p className="full-card-state"><b>Age: {this.getAge(this.state.profile.dob)}</b></p>
                 <p className="fullprofile-rating">{averageRating}</p>
               </div>
               <div className="comments-container">

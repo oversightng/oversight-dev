@@ -523,7 +523,7 @@ p.rate-tab {
     font-size: 6px !important; }
 
   p.all-card-dob span {
-    font-size: 10px !important; }
+    font-size: 15px !important; }
 
   .about-img-size {
     height: auto !important;
@@ -6019,7 +6019,7 @@ html, body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 6em; }
+  height: 10em; }
 
 .all-card-details {
   background-color: white;

@@ -55,6 +55,7 @@ class Politicians extends React.Component {
             state={politician.state}
             dob={politician.dob}
             party={politician.current_party.name}
+            prev_party={politician.party_history.name}
             loggedin={this.props.loggedin}
             averageRating={politician.rating.average}
             verified={this.state.verified}

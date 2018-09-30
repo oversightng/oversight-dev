@@ -1,25 +1,14 @@
 import React from 'react';
 import Loader from 'react-loader';
-import { ToastContainer, toast } from 'react-toastify';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
 import { withRouter } from 'react-router-dom';
 
-class AllProfileCard extends React.Component {
+class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      showTab: false,
-      clicked: false,
-      selected: '',
-      showProjects: false,
-      showLegalCases: false,
-      showBudget: false,
-      rating: '',
-      childVisible: false,
-      loaded: true,
       signin: false,
     };
   }
@@ -180,7 +169,6 @@ class AllProfileCard extends React.Component {
 
     return (
       <div>
-        <ToastContainer />
         <div className="all-card-container" onClick={this.handleOpen.bind(this)}>
           <div className="all-card-img" style={bgimg}>
           </div>
@@ -245,4 +233,4 @@ class AllProfileCard extends React.Component {
   }
 }
 
-export default withRouter(AllProfileCard);
+export default withRouter(Profile);

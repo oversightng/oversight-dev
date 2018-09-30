@@ -1,5 +1,6 @@
 import React from 'react';
 import Loader from 'react-loader';
+import { ToastContainer, toast } from 'react-toastify';
 import Dialog from 'material-ui/Dialog';
 import ReactStars from 'react-stars';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -63,34 +64,6 @@ class ProfileCard extends React.Component {
 
   handleLogin() {
     this.props.history.push(`/login`);
-  }
-
-  handleRating() {
-    this.setState({ rating: 2 })
-    // console.log(this.state.rating);
-  }
-
-  handleClick(selected) {
-    this.setState({ selected: selected });
-    if (selected === 'projects') {
-      this.setState({
-        showProjects: true,
-        showLegalCases: false,
-        showBudget: false,
-      });
-    } else if (selected === 'cases') {
-      this.setState({
-        showLegalCases: true,
-        showProjects: false,
-        showBudget: false,
-      });
-    } else if (selected === 'budget') {
-      this.setState({
-        showBudget: true,
-        showLegalCases: false,
-        showProjects: false,
-      });
-    }
   }
 
   getAge(dob) {
@@ -202,6 +175,7 @@ class ProfileCard extends React.Component {
 
     return (
       <div>
+        <ToastContainer />
         <div className="card-container" onClick={this.handleOpen.bind(this)}>
           <div className="card-img" style={bgimg}>
           </div>
@@ -230,6 +204,7 @@ class ProfileCard extends React.Component {
               <li>State: <b>{this.props.state}</b></li>
               <li>Age: <b>{this.getAge(this.props.dob)}</b></li>
               <li>Party: <b>{this.props.party}</b></li>
+              <li>Previous Party: <b>{this.props.prev_party}</b></li>
               <Loader loaded={this.state.loaded} className="loader" lines={15} length={5} width={3} radius={30}
                 corners={1} rotate={0} direction={1} color="green" speed={3}
                 trail={60} shadow={false} hwaccel={false} className="spinner"

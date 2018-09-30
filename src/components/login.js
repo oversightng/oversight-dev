@@ -35,7 +35,8 @@ class Login extends React.Component {
     })
     .then(response => response.json())
     .then(function (data) {
-      localStorage.setItem('user', data.ratings)
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('ratings', data.user.ratings);
       localStorage.setItem('token', data.token);
       localStorage.setItem('id', data.user.id);
       localStorage.setItem('name', data.user.firstName);
@@ -44,10 +45,8 @@ class Login extends React.Component {
       if (!data.success) {
         toast('Wrong login details');
       } else {
-        toast('Successfully logged in', {
-          onOpen: ({ foo }) => console.log('open'),
-          onClose: ({ foo }) => console.log('close')
-        });
+        toast('Successfully logged in');
+        document.location.href="/";
       }
     })
     .catch(function (error) {

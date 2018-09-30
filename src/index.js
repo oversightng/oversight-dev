@@ -14,6 +14,11 @@ import SignUp from './components/signup';
 import ForgotPassword from './components/forgotpassword';
 import ResetPassword from './components/resetpassword';
 import EditProfile from './components/editprofile';
+import GenderPoliticiansQuery from './components/analytics/gender';
+import PartyPoliticiansQuery from './components/analytics/party';
+import MyProfile from './components/analytics/profile';
+import StatePoliticiansQuery from './components/analytics/state';
+import HighestRatedPoliticians from './components/analytics/highest-rated';
 
 ReactDOM.render(
   <Router basename="/oversight-rate">
@@ -27,7 +32,11 @@ ReactDOM.render(
       <Route path="/edit-profile" component={EditProfile} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
-      <Route exact path="/" component={App} />
+      <Route path="/search-genders" component={GenderPoliticiansQuery} />
+      <Route path="/search-parties" component={PartyPoliticiansQuery} />
+      <Route path="/search-states" component={StatePoliticiansQuery} />
+      <Route path="/highest-rated" component={HighestRatedPoliticians} />
+      <Route path="/myprofile" component={MyProfile} />
       <Route exact path="/" component={App} />
 
     </Switch>
