@@ -46,7 +46,7 @@ class Login extends React.Component {
         toast('Wrong login details');
       } else {
         toast('Successfully logged in');
-        document.location.href="/";
+        document.location.href="/oversight-rate";
       }
     })
     .catch(function (error) {
