@@ -127,9 +127,9 @@ class PartyPoliticians extends React.Component {
       (
         <ul className="draw-list">
           <li onClick={this.goHome.bind(this)}>Home</li>
-          <li onClick={this.goToParty.bind(this)}>Search by Party</li>
-          <li onClick={this.goToState.bind(this)}>Search by State</li>
-          <li onClick={this.goToGender.bind(this)}>Search by Gender</li>
+          <li onClick={this.goToParty.bind(this)}>Filter by Party</li>
+          <li onClick={this.goToState.bind(this)}>Filter by State</li>
+          <li onClick={this.goToGender.bind(this)}>Filter by Gender</li>
           <li onClick={this.goToProfile.bind(this)}>My Profile</li>
           <li onClick={this.goToHighest.bind(this)}>Highest Rated</li>
           <li onClick={this.logout.bind(this)}>Logout</li>
