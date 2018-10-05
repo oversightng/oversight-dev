@@ -106,7 +106,12 @@ class LandingPage extends React.Component {
           onUserInput={this.handleUserInput.bind(this)}
           onClick={this.someEvent}
         />
+        <Loader loaded={this.state.loaded} className="loader" lines={15} length={5} width={3} radius={30}
+          corners={1} rotate={0} direction={1} color="green" speed={3}
+          trail={60} shadow={false} hwaccel={false} className="spinner"
+          zIndex={2e9}>
           <Politicians politicians={filtered} loggedin={this.state.loggedin} />
+        </Loader>
       </div>
     );
   }

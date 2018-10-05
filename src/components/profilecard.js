@@ -125,16 +125,16 @@ class ProfileCard extends React.Component {
       console.log(newRating);
     }
 
-    let user = JSON.parse(localStorage.getItem('user'));
-    console.log(user.ratings);
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // console.log(user.ratings);
 
-    user.ratings.forEach(function(rating) {
-      if (rating.politician === this.props.id){
-        this.setState({
-          rating: rating.value,
-        });
-      }
-    });
+    // user.ratings.forEach(function(rating) {
+    //   if (rating.politician === this.props.id){
+    //     this.setState({
+    //       rating: rating.value,
+    //     });
+    //   }
+    // });
 
 // Loggedin Rate input display
     let rate;
