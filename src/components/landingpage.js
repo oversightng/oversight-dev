@@ -98,7 +98,7 @@ class LandingPage extends React.Component {
         <ToastContainer />
         {topnav}
         <div className="col-md-6 col-md-offset-4">
-          <img src="http://oi64.tinypic.com/oa6kax.jpg" className="landing-logo img-responsive mx-auto float-left" />
+          <img src="../img/logo-beta.png" className="landing-logo img-responsive mx-auto float-left" />
         </div>
         <SearchBar
           data={filtered}
