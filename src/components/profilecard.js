@@ -191,7 +191,7 @@ class ProfileCard extends React.Component {
           <div className="card-img" style={bgimg}>
           </div>
           <div className="card-details">
-            <p className="card-name">{this.props.name}</p>
+            <p className="card-name">{this.props.name} <span className="card-party">{this.props.party}</span></p>
             <p className="card-post">{this.props.post}</p>
             <p className="card-state"><b>{this.props.state}</b></p>
             <p className="card-dob">{averageRating}</p>
