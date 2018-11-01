@@ -92,8 +92,8 @@ class fullPage extends React.Component {
               <div className="full-profile-img" style={bgimg} />
             </div>
             <FontIcon className="material-icons clear-icon" onClick={this.reload.bind(this)}>clear</FontIcon>
-            <div className="fullprofile-details-cont">
-              <div className="all-card-details">
+            <div className="col-md-6 fullprofile-details-cont">
+              <div className="col-md-4 all-card-details">
                 <p className="full-card-name">{this.state.profile.name}</p>
                 <p className="full-card-post">{this.post}</p>
                 <p className="full-card-state"><b>{this.state.profile.state}</b></p>
@@ -101,6 +101,12 @@ class fullPage extends React.Component {
                 <p className="full-card-state"><b>Previous Party: {this.previous_party}</b></p>
                 <p className="full-card-state"><b>Age: {this.getAge(this.state.profile.dob)}</b></p>
                 <p className="fullprofile-rating">{averageRating}</p>
+              </div>
+              <div className="col-md-6">
+                <a className="btn btn-default btn-large top-button"> Achievements & Awards </a> <br/>
+                <a className="btn btn-default btn-large"> Career History  </a> <br/>
+                <a className="btn btn-default btn-large"> Portfolio </a> <br/>
+                <a className="btn btn-default btn-large"> Public Affairs </a> <br/>
               </div>
               <div className="comments-container">
                 <Comments politician_id={this.props.match.params.id} />
