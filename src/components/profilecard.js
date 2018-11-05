@@ -10,7 +10,7 @@ class ProfileCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      opendialog: false,
       showTab: false,
       clicked: false,
       selected: '',
@@ -54,12 +54,11 @@ class ProfileCard extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true });
+    this.setState({ opendialog: true });
   }
 
   handleClose() {
-    console.log('handleclose');
-    this.setState({ open: false });
+    this.setState({ opendialog: false });
   }
 
   handleLogin() {
@@ -199,7 +198,7 @@ class ProfileCard extends React.Component {
         </div>
         <Dialog
           modal={false}
-          open={this.state.open}
+          open={this.state.opendialog}
           onRequestClose={this.handleClose.bind(this)}
           autoScrollBodyContent={true}
         >

@@ -21,7 +21,7 @@ import StatePoliticiansQuery from './components/analytics/state';
 import HighestRatedPoliticians from './components/analytics/highest-rated';
 
 ReactDOM.render(
-  <Router basename="/">
+  <Router basename="/oversight-rate">
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/admin" component={Admin} />

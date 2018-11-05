@@ -1,9 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
 import LandingPage from './landingpage';
-import FullPage from './fullPage';
 
 injectTapEventPlugin();
 

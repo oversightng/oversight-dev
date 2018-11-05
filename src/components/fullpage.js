@@ -7,15 +7,19 @@ import {
 } from 'react-share';
 import ReactStars from 'react-stars';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TextField from 'material-ui/TextField';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontIcon from 'material-ui/FontIcon';
 import { withRouter } from 'react-router-dom';
-import Comments from './comments'
+import Comments from './comments';
 
 class fullPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      openawards: false,
+      opencareerhistory: false,
+      openportfolio: false,
+      openpublicaffairs: false,
       profile: {},
     };
   }
@@ -55,6 +59,39 @@ class fullPage extends React.Component {
       age--;
     }
     return age;
+  }
+
+  openAwards() {
+    console.log("open awards");
+    this.setState({ openawards: true });
+  }
+
+  closeAwards() {
+    this.setState({ closeawards: false });
+  }
+
+  openCareerHistory() {
+    this.setState({ opencareerhistory: true });
+  }
+
+  closeCareerHistory() {
+    this.setState({ closecareerhistory: false });
+  }
+
+  openPortfolio() {
+    this.setState({ openportfolio: true });
+  }
+
+  closePortfolio() {
+    this.setState({ closeportfolio: false });
+  }
+
+  openPublicAffairs() {
+    this.setState({ openpublicaffairs: true });
+  }
+
+  closePublicAffairs() {
+    this.setState({ closepublicaffairs: false });
   }
 
   render() {
@@ -103,10 +140,10 @@ class fullPage extends React.Component {
                 <p className="fullprofile-rating">{averageRating}</p>
               </div>
               <div className="col-md-6">
-                <a className="btn btn-default btn-large top-button"> Achievements & Awards </a> <br/>
-                <a className="btn btn-default btn-large"> Career History  </a> <br/>
-                <a className="btn btn-default btn-large"> Portfolio </a> <br/>
-                <a className="btn btn-default btn-large"> Public Affairs </a> <br/>
+                <a className="btn btn-default btn-large top-button" onClick={this.openAwards.bind(this)}> Achievements & Awards </a> <br/>
+                <a className="btn btn-default btn-large" onClick={this.openCareerHistory.bind(this)}> Career History  </a> <br/>
+                <a className="btn btn-default btn-large" onClick={this.openPortfolio.bind(this)}> Portfolio </a> <br/>
+                <a className="btn btn-default btn-large" onClick={this.openPublicAffairs.bind(this)}> Public Affairs </a> <br/>
               </div>
               <div className="comments-container">
                 <Comments politician_id={this.props.match.params.id} />
